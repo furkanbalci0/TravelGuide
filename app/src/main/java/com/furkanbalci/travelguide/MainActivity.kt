@@ -31,5 +31,13 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel.initializeNavigation(binding,
             findNavController(R.id.nav_host_fragment_container))
 
+        val navController = this.findNavController(R.id.nav_host_fragment_container)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.detailFragment -> binding.bottomNavigationView.visibility = View.GONE
+                else -> binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+
     }
 }

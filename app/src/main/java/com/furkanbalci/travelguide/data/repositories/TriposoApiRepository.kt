@@ -1,6 +1,6 @@
 package com.furkanbalci.travelguide.data.repositories
 
-import com.furkanbalci.travelguide.data.datasource.rapid.remote.RapidDataSource
+import com.furkanbalci.travelguide.data.datasource.triposo.remote.TriposoDataSource
 import com.furkanbalci.travelguide.data.models.attractions.AttractionResult
 import com.furkanbalci.travelguide.data.models.country.CountryResult
 import com.furkanbalci.travelguide.util.Resource
@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Singleton
 
 @Singleton
-class RapidApiRepository {
+class TriposoApiRepository {
 
-    private var dataSource: RapidDataSource? = null
+    private var dataSource: TriposoDataSource? = null
 
     init {
-        dataSource = RapidDataSource()
+        dataSource = TriposoDataSource()
     }
 
     fun getAttractions(city: String): Flow<Resource<AttractionResult>> {

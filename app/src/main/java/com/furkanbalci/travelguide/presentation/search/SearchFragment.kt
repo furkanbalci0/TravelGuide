@@ -72,6 +72,8 @@ class SearchFragment : Fragment() {
     private fun initializeAttractions() {
         //Observer deals.
 
+        
+
         attractionsViewModel.success.observe(viewLifecycleOwner) {
             binding.searchNearbyAttractionsRecyclerView.adapter = SearchAttractionsAdapter(it)
         }

@@ -9,7 +9,8 @@ import com.furkanbalci.travelguide.util.ResourceStatus
 import com.furkanbalci.travelguide.vievmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
-class DetailViewModel(application: Application) : BaseViewModel<Map<String, Any>>(application) {
+class DetailImageViewModel(application: Application) : BaseViewModel<String>(application) {
+
 
 
 }

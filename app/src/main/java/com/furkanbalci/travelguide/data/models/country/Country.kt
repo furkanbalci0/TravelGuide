@@ -16,7 +16,7 @@ data class Country(
     @Json(name = "name")
     val name: String,
     @Json(name = "parent_id")
-    val parentId: String,
+    val parentId: String?,
     @Json(name = "score")
     val score: Double,
     @Json(name = "snippet")
@@ -44,7 +44,7 @@ data class Country(
         @Json(name = "attribution")
         val attribution: Attribution,
         @Json(name = "caption")
-        val caption: String,
+        val caption: String?,
         @Json(name = "sizes")
         val sizes: Sizes,
         @Json(name = "source_id")

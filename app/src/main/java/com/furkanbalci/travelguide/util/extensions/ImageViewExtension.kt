@@ -8,8 +8,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.furkanbalci.travelguide.R
 
-
-
 fun ImageView.download(url: String) {
 
     //Options

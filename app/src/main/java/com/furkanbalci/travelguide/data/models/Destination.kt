@@ -23,7 +23,7 @@ data class Destination(
     }
 
     override fun description(): String {
-        return this.country.name
+        return this.country.snippet
     }
 
     override fun miniDescription(): String {

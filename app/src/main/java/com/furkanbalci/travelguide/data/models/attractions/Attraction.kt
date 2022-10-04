@@ -40,7 +40,7 @@ data class Attraction(
         @Json(name = "attribution")
         val attribution: Attribution,
         @Json(name = "caption")
-        val caption: String,
+        val caption: String?,
         @Json(name = "sizes")
         val sizes: Sizes,
         @Json(name = "source_id")
@@ -122,7 +122,7 @@ data class Attraction(
     )
 
     override fun mainImageUrl(): String {
-        return images.firstOrNull()?.sizes?.medium?.url ?: "https://image.shutterstock.com/image-photo/touristic-sightseeing-ships-golden-horn-260nw-2019353819.jpg"
+        return images.firstOrNull()?.sizes?.medium?.url ?: ""
     }
 
     override fun name(): String {
@@ -134,7 +134,7 @@ data class Attraction(
     }
 
     override fun miniDescription(): String {
-        return "Phone: ${properties[0].value}"
+        return properties[2].value
     }
 
     override fun getOtherImages(): List<String> {

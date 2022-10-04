@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="detailObject"
             type="com.furkanbalci.travelguide.di.DetailObject" />
@@ -35,7 +34,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/imageView1"
+                        android:id="@+id/main_image"
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
                         android:layout_marginTop="100dp"
@@ -46,6 +45,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/fullscreen_icon"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:layout_marginTop="16dp"
@@ -63,15 +63,13 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView5"
+                    android:id="@+id/recycler_view_card_view"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginEnd="18dp"
                     android:layout_marginBottom="18dp"
-                    android:background="@color/transparent"
-                    android:backgroundTint="@color/transparent"
-                    android:foreground="@drawable/blurred_background"
+                    android:backgroundTint="#4DFFFFFF"
                     android:gravity="center"
                     app:cardCornerRadius="15dp"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView4"
@@ -143,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/montserrat_regular"
                     android:hint="@string/hint"
                     android:text="@{detailObject.miniDescription()}"
                     android:textSize="16sp"
@@ -157,8 +155,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:paddingBottom="80dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:paddingBottom="100dp"
                     android:text="@{detailObject.description()}"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +164,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/mini_content" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button"
+                    android:id="@+id/add_bookmark_button"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:layout_centerInParent="true"

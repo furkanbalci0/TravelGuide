@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.furkanbalci.travelguide.data.models.attractions.Attraction
+import com.bumptech.glide.Glide
 import com.furkanbalci.travelguide.databinding.FragmentDetailBinding
-import com.furkanbalci.travelguide.util.extensions.download
+import com.furkanbalci.travelguide.di.DetailObject
+import com.stfalcon.imageviewer.StfalconImageViewer
 
 
 class DetailFragment : Fragment() {
@@ -28,8 +29,19 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val attraction = arguments?.get("attraction") as Attraction
-        binding.detailObject = attraction
-        binding.detailImageRecyclerView.adapter = DetailImageAdapter(attraction.getOtherImages())
+        val detailObject = arguments?.get("detailObject") as DetailObject
+        binding.detailObject = detailObject
+        if (detailObject.getOtherImages().size == 1) {
+            binding.recyclerViewCardView.visibility = View.GONE
+        } else {
+            binding.detailImageRecyclerView.adapter = DetailImageAdapter(binding, detailObject.getOtherImages())
+        }
+
+        binding.fullscreenIcon.setOnClickListener {
+            val preferences = requireContext().getSharedPreferences("com.furkanbalci.travelguide", 0)
+            StfalconImageViewer.Builder(context, detailObject.getOtherImages()) { view, imageUrl ->
+                Glide.with(view).load(imageUrl).centerInside().into(view)
+            }.withStartPosition(preferences.getInt("selected-detail-image-position", 0)).show()
+        }
     }
 }

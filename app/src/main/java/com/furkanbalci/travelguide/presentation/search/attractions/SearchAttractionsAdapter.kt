@@ -2,7 +2,6 @@ package com.furkanbalci.travelguide.presentation.search.attractions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,7 @@ class SearchAttractionsAdapter(private val attractionList: List<Attraction>) :
             binding.attraction = attraction
             binding.root.setOnClickListener {
                 Navigation.findNavController(it)
-                    .navigate(R.id.action_navigation_search_to_detailFragment, bundleOf("attraction" to attraction))
+                    .navigate(R.id.action_navigation_search_to_detailFragment, bundleOf("detailObject" to attraction))
             }
         }
     }

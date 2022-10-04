@@ -1,4 +1,4 @@
-package com.furkanbalci.travelguide.data.datasource.rapid
+package com.furkanbalci.travelguide.data.datasource.triposo
 
 import com.furkanbalci.travelguide.data.models.attractions.AttractionResult
 import com.furkanbalci.travelguide.data.models.country.CountryResult
@@ -13,10 +13,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RapidApiService {
+interface TriposoApiService {
 
 
-    @GET("location.json")
+    @GET("location.json?count=100")
     suspend fun getCountries(): Response<CountryResult>
 
     @GET("poi.json?tag_labels=sightseeing&bookable=1&fields=properties,booking_info,name,images,intro&order_by=-score")
@@ -24,7 +24,7 @@ interface RapidApiService {
 
     companion object {
 
-        fun create(): RapidApiService {
+        fun create(): TriposoApiService {
             val moshi: Moshi = Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())
                 .build()
@@ -42,13 +42,13 @@ interface RapidApiService {
 
 
             val retrofit = Retrofit.Builder()
-                .baseUrl(Constants.RAPID_BASE_URL)
+                .baseUrl(Constants.TRIPOSO_BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .client(client)
                 .build()
 
-            return retrofit.create(RapidApiService::class.java)
+            return retrofit.create(TriposoApiService::class.java)
         }
     }
 

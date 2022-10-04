@@ -4,14 +4,14 @@ import android.app.Application
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.furkanbalci.travelguide.data.models.Destination
-import com.furkanbalci.travelguide.data.repositories.RapidApiRepository
+import com.furkanbalci.travelguide.data.repositories.TriposoApiRepository
 import com.furkanbalci.travelguide.util.ResourceStatus
 import com.furkanbalci.travelguide.vievmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
 class DestinationsViewModel(application: Application) : BaseViewModel<List<Destination>>(application) {
 
-    private var repository: RapidApiRepository = RapidApiRepository()
+    private var repository: TriposoApiRepository = TriposoApiRepository()
 
     init {
         this.getData()

@@ -1,15 +1,15 @@
-package com.furkanbalci.travelguide.data.datasource.rapid.remote
+package com.furkanbalci.travelguide.data.datasource.triposo.remote
 
-import com.furkanbalci.travelguide.data.datasource.rapid.RapidApiService
+import com.furkanbalci.travelguide.data.datasource.triposo.TriposoApiService
 import com.furkanbalci.travelguide.data.models.attractions.AttractionResult
 import com.furkanbalci.travelguide.data.models.country.CountryResult
 import com.furkanbalci.travelguide.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class RapidDataSource {
+class TriposoDataSource {
 
-    private var service: RapidApiService = RapidApiService.create()
+    private var service: TriposoApiService = TriposoApiService.create()
 
     /**
      * Get all countries
