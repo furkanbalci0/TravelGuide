@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.data.models.Destination
 import com.furkanbalci.travelguide.databinding.SearchDestinationItemBinding
+import com.furkanbalci.travelguide.util.PreferencesUtil
+import com.furkanbalci.travelguide.util.PreferencesUtil.set
 
 class SearchDestinationsAdapter(private val destinationList: List<Destination>) :
     RecyclerView.Adapter<SearchDestinationsAdapter.ViewHolder>() {
@@ -18,9 +20,10 @@ class SearchDestinationsAdapter(private val destinationList: List<Destination>) 
             binding.destination = destination
             binding.root.setOnClickListener {
                 Navigation.findNavController(it)
-                    .navigate(R.id.action_navigation_search_to_detailFragment, bundleOf("detailObject" to destination))
-                val preferences = binding.root.context.getSharedPreferences("com.furkanbalci.travelguide", 0)
-                preferences.edit().putString("last-selected-country", destination.country.countryId).apply()
+                    .navigate(R.id.detailFragment, bundleOf("detailObject" to destination))
+
+                // Save last destination
+                PreferencesUtil.defaultPrefs(binding.root.context)["last-selected-country"] = destination.country.countryId
             }
         }
     }

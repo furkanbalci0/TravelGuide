@@ -1,102 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.trip.TripFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".presentation.trip.TripFragment">
 
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/source_sans_pro_bold"
-                android:text="Trip Plan"
-                android:textColor="@color/dark_gray"
-                android:textSize="30sp" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/transparent"
-                android:fadeScrollbars="false"
-                android:scrollbarSize="20dp"
-                android:scrollbarThumbHorizontal="@color/transparent"
-                android:scrollbarThumbVertical="@color/transparent"
-                android:tabStripEnabled="false"
-                app:tabGravity="fill"
-                app:tabIconTint="@color/trip_tab_selector"
-                app:tabIndicator="@color/white"
-                app:tabIndicatorColor="#FF4760"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorHeight="3dp"
-                app:tabInlineLabel="true"
-                app:tabMode="auto"
-                app:tabSelectedTextColor="#FF4760"
-                app:tabTextAppearance="@style/trip_tab_text"
-                app:tabTextColor="#C2C5D6">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/home_tablayout_all_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bag"
-                    android:text="Trips" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bookmark"
-                    android:text="Flights" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tripRecyclerView"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="16dp"
-                tools:itemCount="10"
-                tools:listitem="@layout/trip_item" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:text="Trip Plan"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="30sp" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/transparent"
+                    android:fadeScrollbars="false"
+                    android:scrollbarSize="20dp"
+                    android:scrollbarThumbHorizontal="@color/transparent"
+                    android:scrollbarThumbVertical="@color/transparent"
+                    android:tabStripEnabled="false"
+                    app:tabGravity="fill"
+                    app:tabIconTint="@color/trip_tab_selector"
+                    app:tabIndicator="@color/white"
+                    app:tabIndicatorColor="#FF4760"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorHeight="3dp"
+                    app:tabInlineLabel="true"
+                    app:tabMode="auto"
+                    app:tabSelectedTextColor="#FF4760"
+                    app:tabTextAppearance="@style/trip_tab_text"
+                    app:tabTextColor="#C2C5D6">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/home_tablayout_all_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:icon="@drawable/ic_bag"
+                        android:text="Trips" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:icon="@drawable/ic_bookmark"
+                        android:text="Bookmark" />
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginStart="16dp"
+                    android:clipToPadding="false"
+                    android:paddingBottom="80dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="16dp"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/trip_item" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="106dp"
+            android:backgroundTint="#FF4760"
+            app:icon="@drawable/ic_plus"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SpeakableTextPresentCheck">
+
+        </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
 
 
-        </LinearLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginBottom="90dp"
-        android:src="@drawable/ic_plus"
-        android:backgroundTint="#FF4760"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 

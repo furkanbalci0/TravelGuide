@@ -12,7 +12,7 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:paddingStart="5dp"
         android:paddingEnd="5dp">
@@ -20,7 +20,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
 
 
             app:cardCornerRadius="6dp"

@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="attraction"
-            type="com.furkanbalci.travelguide.data.models.attractions.Attraction" />
+            name="detailObject"
+            type="com.furkanbalci.travelguide.di.DetailObject" />
     </data>
 
     <FrameLayout
@@ -20,18 +20,20 @@
             android:layout_height="180dp"
             app:cardCornerRadius="10dp">
 
-            <ImageView
-                android:id="@+id/search_attractions_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:downloadUrl="@{attraction.mainImageUrl()}"
-                android:foreground="@drawable/image_foreground"
-                android:scaleType="centerCrop" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/attraction_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/search_attractions_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:downloadUrl="@{detailObject.mainImageUrl()}"
+                    android:foreground="@drawable/image_foreground"
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:id="@+id/search_attractions_country_title"
@@ -39,8 +41,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="55dp"
                     android:fontFamily="@font/source_sans_pro_bold"
+                    android:gravity="center"
                     android:hint="@string/hint"
-                    android:text="@{attraction.name()}"
+                    android:text="@{detailObject.name()}"
+                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +57,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/source_sans_pro"
+                    android:gravity="center"
                     android:hint="@string/hint"
-                    android:text="@{attraction.properties[0].value}"
+                    android:text="@{detailObject.miniDescription()}"
+                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     app:layout_constraintEnd_toEndOf="@+id/search_attractions_country_title"
@@ -81,7 +87,7 @@
                         android:maxLength="30"
                         android:paddingStart="6dp"
                         android:paddingEnd="6dp"
-                        android:text="@{attraction.properties[2].value}"
+                        android:text="@{detailObject.otherImages.size() + ` Images`}"
                         android:textAllCaps="true"
                         android:textColor="#FFFFFF"
                         android:textSize="14sp" />
@@ -89,29 +95,34 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/bookmark_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:backgroundTint="#33FCFCFD"
-                    app:cardCornerRadius="100dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_bookmark" />
-
-                </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bookmark_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:backgroundTint="#33FCFCFD"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/bookmark_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_bookmark" />
+
+            </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
+
 
 
     </FrameLayout>

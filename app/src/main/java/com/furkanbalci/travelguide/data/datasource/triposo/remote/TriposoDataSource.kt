@@ -1,6 +1,7 @@
 package com.furkanbalci.travelguide.data.datasource.triposo.remote
 
 import com.furkanbalci.travelguide.data.datasource.triposo.TriposoApiService
+import com.furkanbalci.travelguide.data.models.article.ArticleResult
 import com.furkanbalci.travelguide.data.models.attractions.AttractionResult
 import com.furkanbalci.travelguide.data.models.country.CountryResult
 import com.furkanbalci.travelguide.util.Resource
@@ -34,6 +35,31 @@ class TriposoDataSource {
             emit(Resource.Error(e))
             e.printStackTrace()
         }
+    }
+
+    /**
+     * Get all articles
+     *
+     * @return ArticleResult
+     * @see ArticleResult
+     */
+    fun getArticles(): Flow<Resource<ArticleResult>> = flow {
+
+        try {
+            emit(Resource.Loading())
+
+            val response = service.getArticles()
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    emit(Resource.Success(it))
+                }
+            }
+
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+            e.printStackTrace()
+        }
 
     }
 
@@ -49,6 +75,31 @@ class TriposoDataSource {
             emit(Resource.Loading())
 
             val response = service.getAttractions(city)
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    emit(Resource.Success(it))
+                }
+            }
+
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * Finds by id
+     *
+     * @param id Id
+     * @return AttractionResult
+     */
+    fun findAttraction(id: String): Flow<Resource<AttractionResult>> = flow {
+
+        try {
+            emit(Resource.Loading())
+
+            val response = service.findAttraction(id)
 
             if (response.isSuccessful) {
                 response.body()?.let {

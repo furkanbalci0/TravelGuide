@@ -5,6 +5,8 @@ import com.furkanbalci.travelguide.di.DetailObject
 import com.squareup.moshi.Json
 
 data class Attraction(
+    @Json(name = "id")
+    val id: String,
     @Json(name = "booking_info")
     val bookingInfo: BookingInfo,
     @Json(name = "images")
@@ -14,9 +16,10 @@ data class Attraction(
     @Json(name = "name")
     val name: String,
     @Json(name = "properties")
-    val properties: List<Property>,
+    val properties: List<Property?>,
     @Json(name = "sightseeing_score")
-    val sightseeingScore: Double
+    val sightseeingScore: Double,
+    var isBookmarked: Boolean = false
 ) : DetailObject {
     data class BookingInfo(
         @Json(name = "price")
@@ -112,13 +115,13 @@ data class Attraction(
 
     data class Property(
         @Json(name = "key")
-        val key: String,
+        val key: String?,
         @Json(name = "name")
-        val name: String,
+        val name: String?,
         @Json(name = "ordinal")
-        val ordinal: Int,
+        val ordinal: Int?,
         @Json(name = "value")
-        val value: String
+        val value: String?
     )
 
     override fun mainImageUrl(): String {
@@ -134,7 +137,10 @@ data class Attraction(
     }
 
     override fun miniDescription(): String {
-        return properties[2].value
+        if (properties.size > 2) {
+            return properties[2]?.value ?: ""
+        }
+        return ""
     }
 
     override fun getOtherImages(): List<String> {

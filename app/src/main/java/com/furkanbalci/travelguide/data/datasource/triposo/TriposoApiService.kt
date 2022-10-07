@@ -1,5 +1,6 @@
 package com.furkanbalci.travelguide.data.datasource.triposo
 
+import com.furkanbalci.travelguide.data.models.article.ArticleResult
 import com.furkanbalci.travelguide.data.models.attractions.AttractionResult
 import com.furkanbalci.travelguide.data.models.country.CountryResult
 import com.furkanbalci.travelguide.util.Constants
@@ -19,8 +20,14 @@ interface TriposoApiService {
     @GET("location.json?count=100")
     suspend fun getCountries(): Response<CountryResult>
 
-    @GET("poi.json?tag_labels=sightseeing&bookable=1&fields=properties,booking_info,name,images,intro&order_by=-score")
+    @GET("poi.json?tag_labels=sightseeing&bookable=1&fields=id,properties,booking_info,name,images,intro&order_by=-score")
     suspend fun getAttractions(@Query("location_id") city: String): Response<AttractionResult>
+
+    @GET("poi.json")
+    suspend fun findAttraction(@Query("id") attractionId: String): Response<AttractionResult>
+
+    @GET("article.json?order_by=-score&count=100")
+    suspend fun getArticles(): Response<ArticleResult>
 
     companion object {
 

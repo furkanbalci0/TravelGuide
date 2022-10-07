@@ -2,7 +2,10 @@ package com.furkanbalci.travelguide.presentation.home.deals
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.data.models.MockObject
 import com.furkanbalci.travelguide.databinding.HomeDealsItemBinding
 import com.furkanbalci.travelguide.di.DetailObject
@@ -12,6 +15,10 @@ class HomeDealsAdapter(private val results: List<DetailObject>) : RecyclerView.A
     inner class ViewHolder(private val binding: HomeDealsItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(result: MockObject) {
             binding.detailObject = result
+            binding.root.setOnClickListener {
+                Navigation.findNavController(it)
+                    .navigate(R.id.action_navigation_home_to_detailFragment, bundleOf("detailObject" to result))
+            }
         }
     }
 

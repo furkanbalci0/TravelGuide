@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.databinding.FragmentSearchBinding
 import com.furkanbalci.travelguide.presentation.search.attractions.AttractionsViewModel
@@ -72,7 +71,6 @@ class SearchFragment : Fragment() {
     private fun initializeAttractions() {
         //Observer deals.
 
-        
 
         attractionsViewModel.success.observe(viewLifecycleOwner) {
             binding.searchNearbyAttractionsRecyclerView.adapter = SearchAttractionsAdapter(it)
@@ -87,8 +85,8 @@ class SearchFragment : Fragment() {
                 binding.attractionsProgressBar.visibility = View.VISIBLE
             } else {
                 binding.searchNearbyAttractionsRecyclerView.visibility = View.VISIBLE
-               binding.attractionsErrorText.visibility = View.GONE
-               binding.attractionsProgressBar.visibility = View.GONE
+                binding.attractionsErrorText.visibility = View.GONE
+                binding.attractionsProgressBar.visibility = View.GONE
             }
         }
 

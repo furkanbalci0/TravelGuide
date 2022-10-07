@@ -1,9 +1,11 @@
 package com.furkanbalci.travelguide.util.extensions
 
 import android.widget.ImageView
+import androidx.core.graphics.toColorInt
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.furkanbalci.travelguide.R
@@ -14,6 +16,7 @@ fun ImageView.download(url: String) {
     val options = RequestOptions()
         .placeholder(placeholderProgressBar(this))
         .error(R.color.dark_gray)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .centerCrop()
 
     //Set image
@@ -26,6 +29,8 @@ fun ImageView.download(url: String) {
 
 private fun placeholderProgressBar(view: ImageView): CircularProgressDrawable {
     return CircularProgressDrawable(view.context).apply {
+        //Change color
+        setColorSchemeColors("#FF4760".toColorInt())
         strokeWidth = 10f
         centerRadius = 50f
         start()

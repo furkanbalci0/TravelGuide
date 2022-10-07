@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.furkanbalci.travelguide.databinding.DetailImageItemBinding
 import com.furkanbalci.travelguide.databinding.FragmentDetailBinding
+import com.furkanbalci.travelguide.util.PreferencesUtil
+import com.furkanbalci.travelguide.util.PreferencesUtil.set
 import com.furkanbalci.travelguide.util.extensions.download
 
 class DetailImageAdapter(
@@ -21,8 +23,7 @@ class DetailImageAdapter(
                 miniImage.setOnClickListener {
                     if (miniImage.drawable != detailBinding.mainImage.drawable) {
                         detailBinding.mainImage.download(imageUrl)
-                        val preferences = detailBinding.root.context.getSharedPreferences("com.furkanbalci.travelguide", 0)
-                        preferences.edit().putInt("selected-detail-image-position", position).apply()
+                        PreferencesUtil.defaultPrefs(binding.root.context)["selected-detail-image-position"] = position
                     }
                 }
             }

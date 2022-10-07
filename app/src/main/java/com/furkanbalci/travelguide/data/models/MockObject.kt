@@ -50,6 +50,6 @@ data class MockObject(
     }
 
     override fun miniDescription(): String {
-       return city
+        return city
     }
 }

@@ -7,6 +7,7 @@ import com.furkanbalci.travelguide.data.models.Destination
 import com.furkanbalci.travelguide.data.repositories.TriposoApiRepository
 import com.furkanbalci.travelguide.util.ResourceStatus
 import com.furkanbalci.travelguide.vievmodel.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DestinationsViewModel(application: Application) : BaseViewModel<List<Destination>>(application) {
@@ -19,7 +20,7 @@ class DestinationsViewModel(application: Application) : BaseViewModel<List<Desti
 
     private fun getData() {
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             repository.getCountries().asLiveData(viewModelScope.coroutineContext).observeForever {
                 when (it.status) {
 
@@ -38,7 +39,8 @@ class DestinationsViewModel(application: Application) : BaseViewModel<List<Desti
                         error.postValue(false)
 
                         //Convert to Destination
-                        success.postValue(it.data!!.results.map { country -> Destination(country) })
+                        val list = it.data!!.results.map { country -> Destination(country) }
+                        success.postValue(list.shuffled())
                     }
                 }
             }
