@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.furkanbalci.travelguide.data.datasource.room.RoomDao
 import com.furkanbalci.travelguide.data.models.room.attraction.AttractionEntity
 
-@Database(entities = [AttractionEntity::class], version = 3, exportSchema = false)
+@Database(entities = [AttractionEntity::class], version = 4, exportSchema = false)
 abstract class LocalRoomDatabase : RoomDatabase() {
 
     abstract fun roomDao(): RoomDao
@@ -22,7 +22,7 @@ abstract class LocalRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LocalRoomDatabase::class.java, "travel_app_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 // return instance
                 instance

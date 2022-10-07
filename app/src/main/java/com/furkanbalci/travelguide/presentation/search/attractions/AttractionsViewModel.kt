@@ -20,12 +20,10 @@ class AttractionsViewModel(application: Application) : BaseViewModel<List<Attrac
     private var roomRepository: RoomRepository = RoomRepository(application)
 
     init {
-        val lastSelectedCountry = PreferencesUtil.defaultPrefs(application.applicationContext)["last-selected-country", "Amsterdam"]
-        this.getData(lastSelectedCountry)
+        this.getData()
     }
 
     fun getData(city: String = "Amsterdam") {
-
         viewModelScope.launch(Dispatchers.Main) {
             repository.getAttractions(city).asLiveData(viewModelScope.coroutineContext).observeForever { it ->
                 when (it.status) {
@@ -43,15 +41,7 @@ class AttractionsViewModel(application: Application) : BaseViewModel<List<Attrac
                     ResourceStatus.SUCCESS -> {
                         loading.postValue(false)
                         error.postValue(false)
-                        launch(Dispatchers.Main) {
-                            val bookmarks = roomRepository.getAllAttractions()
-                            for (attraction in it.data!!.results) {
-                                bookmarks.asSequence()
-                                    .filter { bookmark -> attraction.id == bookmark.attractionId }
-                                    .forEach { _ -> attraction.isBookmarked = true }
-                            }
-                        }
-                        success.postValue(it.data!!.results.shuffled())
+                        success.postValue(it.data!!.results.filter { attraction -> attraction.getOtherImages().isNotEmpty() })
 
 
                     }

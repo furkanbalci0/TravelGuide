@@ -13,13 +13,16 @@ interface RoomDao {
      * Attractions
      */
     @Query("SELECT * FROM bookmark")
-    suspend fun getAllAttractions(): List<AttractionEntity>
+    suspend fun getBookmarks(): List<AttractionEntity>
 
     @Insert
     suspend fun insertAttraction(attraction: AttractionEntity)
 
     @Delete
     suspend fun deleteAttraction(attraction: AttractionEntity)
+
+    @Query("DELETE FROM bookmark WHERE attraction_id = :attractionId")
+    suspend fun deleteAttractionById(attractionId: String)
 
 
 }

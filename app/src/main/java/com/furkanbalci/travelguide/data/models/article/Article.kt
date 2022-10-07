@@ -41,7 +41,7 @@ data class Article(
             @Json(name = "attribution")
             val attribution: Attribution,
             @Json(name = "caption")
-            val caption: String,
+            val caption: String?,
             @Json(name = "sizes")
             val sizes: Sizes,
             @Json(name = "source_id")

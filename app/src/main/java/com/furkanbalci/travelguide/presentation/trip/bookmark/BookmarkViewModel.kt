@@ -1,27 +1,31 @@
-package com.furkanbalci.travelguide.presentation.guide.article
+package com.furkanbalci.travelguide.presentation.trip.bookmark
 
 import android.app.Application
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.furkanbalci.travelguide.data.models.attractions.Attraction
+import com.furkanbalci.travelguide.data.repositories.RoomRepository
 import com.furkanbalci.travelguide.data.repositories.TriposoApiRepository
-import com.furkanbalci.travelguide.di.DetailObject
 import com.furkanbalci.travelguide.util.ResourceStatus
 import com.furkanbalci.travelguide.vievmodel.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ArticleViewModel(application: Application) : BaseViewModel<List<DetailObject>>(application) {
+class BookmarkViewModel(application: Application) : BaseViewModel<List<Attraction>>(application) {
 
-    private var repository = TriposoApiRepository()
+    private var triposoRepository: TriposoApiRepository = TriposoApiRepository()
+    private var roomRepository: RoomRepository = RoomRepository(application)
 
     init {
-        this.refreshData()
+        this.loadData()
     }
 
-    fun refreshData(city: String = "Istanbul") {
+    fun loadData() {
+        viewModelScope.launch(Dispatchers.Main) {
 
-        viewModelScope.launch {
-            repository.getArticles(city).asLiveData(viewModelScope.coroutineContext).observeForever { it ->
+            val bookmarkList = roomRepository.getBookmarks().map { it.attractionId }
+
+            triposoRepository.findAttractions(*bookmarkList.toTypedArray()).asLiveData(viewModelScope.coroutineContext).observeForever { it ->
                 when (it.status) {
 
                     ResourceStatus.LOADING -> {
@@ -37,10 +41,11 @@ class ArticleViewModel(application: Application) : BaseViewModel<List<DetailObje
                     ResourceStatus.SUCCESS -> {
                         loading.postValue(false)
                         error.postValue(false)
-                        success.postValue(it.data!!.results.filter {article ->  article.getOtherImages().isNotEmpty() })
+                        success.postValue(it.data!!.results)
                     }
                 }
             }
         }
     }
 }
+

@@ -47,6 +47,10 @@ class DetailFragment : Fragment() {
             binding.detailImageRecyclerView.adapter = DetailImageAdapter(binding, detailObject.getOtherImages())
         }
 
+        binding.addBookmarkButton.setOnClickListener {
+
+        }
+
         //Just add attraction to favorites.
         if (detailObject !is Attraction) {
             binding.addBookmarkButton.visibility = View.GONE

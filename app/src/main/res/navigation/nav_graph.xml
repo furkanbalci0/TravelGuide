@@ -46,4 +46,12 @@
             android:id="@+id/action_navigation_trip_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.furkanbalci.travelguide.presentation.search.result.SearchResultFragment"
+        android:label="SearchResultFragment" >
+        <action
+            android:id="@+id/action_searchResultFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

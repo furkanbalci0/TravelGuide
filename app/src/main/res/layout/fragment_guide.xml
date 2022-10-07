@@ -71,7 +71,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/search_destinations_recycler_view" />
+                    app:layout_constraintTop_toTopOf="@+id/country_recycler_view" />
 
                 <TextView
                     android:id="@+id/country_error_text"
@@ -80,9 +80,9 @@
                     android:text="Please Try Again"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/search_destinations_recycler_view"
-                    app:layout_constraintStart_toStartOf="@+id/search_destinations_recycler_view"
-                    app:layout_constraintTop_toTopOf="@+id/search_destinations_recycler_view" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/country_recycler_view" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/shape_search"
                 android:drawableEnd="@drawable/ic_search"
-                android:hint="A country, a city, a place... or anything "
+                android:hint="A country, a city, a place... or anything"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp" />
 
@@ -113,58 +113,22 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 app:tabGravity="start"
-                app:tabIconTint="@color/guide_tab_selector"
                 app:tabIndicator="@drawable/guide_tab_selector"
+                app:tabIndicatorColor="@color/guide_tab_selector"
                 app:tabIndicatorGravity="stretch"
-                app:tabIndicatorHeight="0dp"
+                app:tabIndicatorAnimationMode="fade"
+                app:tabIconTint="@color/guide_tab_selector"
                 app:tabInlineLabel="true"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="#0048F0"
+                app:tabSelectedTextColor="@color/guide_tab_selector"
                 app:tabTextAppearance="@style/guide_tab_text">
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/home_tablayout_transportations_item1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bag"
-                    android:text="Transportations" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/home_tablayout_transportations_item2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bag"
-                    android:text="Transportations" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/home_tablayout_transportations_item3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bag"
-                    android:text="Transportations" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/home_tablayout_transportations_item4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bag"
-                    android:text="Transportations" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/home_tablayout_transportations_item5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bag"
-                    android:text="Transportations" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/home_tablayout_transportations_item6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bag"
-                    android:text="Transportations" />
             </com.google.android.material.tabs.TabLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -176,6 +140,7 @@
                     android:id="@+id/articles_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingStart="16dp"
                     android:paddingTop="12dp"
@@ -195,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:indeterminate="true"
                     android:indeterminateDrawable="@drawable/custom_progress_bar"
-                    android:layout_marginTop="60dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/articles_recycler_view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -204,12 +169,12 @@
                     android:id="@+id/articles_error_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
                     android:text="Please Try Again"
                     android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/articles_recycler_view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/search_nearby_attractions_recycler_view" />
+                    app:layout_constraintTop_toTopOf="@+id/articles_recycler_view" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

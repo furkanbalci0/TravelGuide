@@ -17,19 +17,19 @@ class TriposoApiRepository {
         dataSource = TriposoDataSource()
     }
 
-    fun getAttractions(city: String): Flow<Resource<AttractionResult>> {
+    fun getAttractions(city: String?): Flow<Resource<AttractionResult>> {
         return dataSource!!.getAttractions(city)
     }
 
-    fun findAttraction(id: String): Flow<Resource<AttractionResult>> {
-        return dataSource!!.findAttraction(id)
+    fun findAttractions(vararg id: String): Flow<Resource<AttractionResult>> {
+        return dataSource!!.findAttractions(id.joinToString("|"))
     }
 
     fun getCountries(): Flow<Resource<CountryResult>> {
         return dataSource!!.getCountries()
     }
 
-    fun getArticles(): Flow<Resource<ArticleResult>> {
-        return dataSource!!.getArticles()
+    fun getArticles(city: String): Flow<Resource<ArticleResult>> {
+        return dataSource!!.getArticles(city)
     }
 }

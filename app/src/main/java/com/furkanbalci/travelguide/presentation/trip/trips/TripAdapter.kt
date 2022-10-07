@@ -13,8 +13,8 @@ import com.furkanbalci.travelguide.di.DetailObject
 class TripAdapter(private val trips: List<DetailObject>) : RecyclerView.Adapter<TripAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: TripItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(result: Trip) {
-            binding.trip = result
+        fun bind(result: DetailObject) {
+            binding.detailObject = result
             binding.root.setOnClickListener {
                 Navigation.findNavController(it)
                     .navigate(R.id.action_navigation_trip_to_detailFragment, bundleOf("detailObject" to result))
@@ -28,7 +28,7 @@ class TripAdapter(private val trips: List<DetailObject>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(this.trips[position] as Trip)
+        holder.bind(this.trips[position])
     }
 
     override fun getItemCount(): Int {

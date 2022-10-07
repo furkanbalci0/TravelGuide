@@ -6,53 +6,44 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.furkanbalci.travelguide.R
-import com.furkanbalci.travelguide.data.models.Trip
+import com.furkanbalci.travelguide.data.models.attractions.Attraction
 import com.furkanbalci.travelguide.databinding.FragmentTripBinding
-import com.furkanbalci.travelguide.presentation.trip.bookmark.BookmarkAdapter
+import com.furkanbalci.travelguide.presentation.search.attractions.SearchAttractionsAdapter
+import com.furkanbalci.travelguide.presentation.trip.bookmark.BookmarkViewModel
 import com.furkanbalci.travelguide.presentation.trip.trips.TripAdapter
 import com.google.android.material.tabs.TabLayout
-import java.util.*
 
 
 class TripFragment : Fragment() {
 
     private lateinit var binding: FragmentTripBinding
+    private lateinit var bookmarkViewModel: BookmarkViewModel
+    private var bookmarkList = mutableListOf<Attraction>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trip, container, false)
+
+        bookmarkViewModel = ViewModelProvider(this)[BookmarkViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
                 when (tab.position) {
                     0 -> {
-                        binding.recyclerView.adapter = TripAdapter(
-                            listOf(
-                                Trip("a", Date(), Date(), listOf(""), ""),
-                                Trip("b", Date(), Date(), listOf(""), ""),
-                                Trip("c", Date(), Date(), listOf(""), ""),
-                                Trip("d", Date(), Date(), listOf(""), ""),
-                                Trip("e", Date(), Date(), listOf(""), ""),
-                            )
-                        )
+                        binding.recyclerView.adapter = SearchAttractionsAdapter(bookmarkList)
                         binding.floatingActionButton.visibility = View.VISIBLE
                     }
                     1 -> {
-                        binding.recyclerView.adapter = BookmarkAdapter(
-                            listOf(
-                                Trip("aaaaaa", Date(), Date(), listOf(""), ""),
-                                Trip("baaa", Date(), Date(), listOf(""), ""),
-                                Trip("caa", Date(), Date(), listOf(""), ""),
-                                Trip("daaa", Date(), Date(), listOf(""), ""),
-                                Trip("eaaaaaa", Date(), Date(), listOf(""), ""),
-                            )
-                        )
-                        binding.floatingActionButton.visibility = View.GONE
+                        binding.recyclerView.adapter = TripAdapter(bookmarkList)
+                        binding.floatingActionButton.visibility = View.VISIBLE
                     }
                 }
             }
@@ -60,15 +51,11 @@ class TripFragment : Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-
-        binding.recyclerView.adapter = TripAdapter(
-            listOf(
-                Trip("a", Date(), Date(), listOf(""), ""),
-                Trip("b", Date(), Date(), listOf(""), ""),
-                Trip("c", Date(), Date(), listOf(""), ""),
-                Trip("d", Date(), Date(), listOf(""), ""),
-                Trip("e", Date(), Date(), listOf(""), ""),
-            )
-        )
+        //binding.recyclerView.adapter = BookmarkAdapter(bookmarkViewModel.getData())
+        bookmarkViewModel.success.observe(viewLifecycleOwner) {
+            bookmarkList.clear()
+            bookmarkList.addAll(it)
+            binding.recyclerView.adapter = SearchAttractionsAdapter(it)
+        }
     }
 }

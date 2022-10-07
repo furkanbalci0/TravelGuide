@@ -20,14 +20,14 @@ interface TriposoApiService {
     @GET("location.json?count=100")
     suspend fun getCountries(): Response<CountryResult>
 
-    @GET("poi.json?tag_labels=sightseeing&bookable=1&fields=id,properties,booking_info,name,images,intro&order_by=-score")
-    suspend fun getAttractions(@Query("location_id") city: String): Response<AttractionResult>
+    @GET("poi.json?tag_labels=sightseeing&bookable=1&fields=id,properties,booking_info,name,images,intro&order_by=-score&count=100")
+    suspend fun getAttractions(@Query("location_id") city: String?): Response<AttractionResult>
 
-    @GET("poi.json")
-    suspend fun findAttraction(@Query("id") attractionId: String): Response<AttractionResult>
+    @GET("poi.json?tag_labels=sightseeing&bookable=1&fields=id,properties,booking_info,name,images,intro&order_by=-score&count=100")
+    suspend fun findAttractions(@Query("id") attractionId: String): Response<AttractionResult>
 
     @GET("article.json?order_by=-score&count=100")
-    suspend fun getArticles(): Response<ArticleResult>
+    suspend fun getArticles(@Query("location_ids") city: String? = null): Response<ArticleResult>
 
     companion object {
 

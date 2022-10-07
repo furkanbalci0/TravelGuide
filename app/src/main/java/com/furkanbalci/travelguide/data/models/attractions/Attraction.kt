@@ -138,9 +138,9 @@ data class Attraction(
 
     override fun miniDescription(): String {
         if (properties.size > 2) {
-            return properties[2]?.value ?: ""
+            return properties[2]?.value ?: name
         }
-        return ""
+        return name
     }
 
     override fun getOtherImages(): List<String> {

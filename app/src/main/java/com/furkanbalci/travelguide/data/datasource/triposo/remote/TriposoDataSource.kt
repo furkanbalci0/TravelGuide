@@ -43,12 +43,12 @@ class TriposoDataSource {
      * @return ArticleResult
      * @see ArticleResult
      */
-    fun getArticles(): Flow<Resource<ArticleResult>> = flow {
+    fun getArticles(city: String): Flow<Resource<ArticleResult>> = flow {
 
         try {
             emit(Resource.Loading())
 
-            val response = service.getArticles()
+            val response = service.getArticles(city)
 
             if (response.isSuccessful) {
                 response.body()?.let {
@@ -69,7 +69,7 @@ class TriposoDataSource {
      * @param city City name
      * @return AttractionResult
      */
-    fun getAttractions(city: String): Flow<Resource<AttractionResult>> = flow {
+    fun getAttractions(city: String?): Flow<Resource<AttractionResult>> = flow {
 
         try {
             emit(Resource.Loading())
@@ -94,12 +94,12 @@ class TriposoDataSource {
      * @param id Id
      * @return AttractionResult
      */
-    fun findAttraction(id: String): Flow<Resource<AttractionResult>> = flow {
+    fun findAttractions(id: String): Flow<Resource<AttractionResult>> = flow {
 
         try {
             emit(Resource.Loading())
 
-            val response = service.findAttraction(id)
+            val response = service.findAttractions(id)
 
             if (response.isSuccessful) {
                 response.body()?.let {

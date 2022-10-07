@@ -17,8 +17,8 @@ class RoomRepository(context: Context) {
         roomDao = LocalRoomDatabase.getDatabase(context).roomDao()
     }
 
-    suspend fun getAllAttractions(): List<AttractionEntity> {
-        return roomDao.getAllAttractions()
+    suspend fun getBookmarks(): List<AttractionEntity> {
+        return roomDao.getBookmarks()
     }
 
     @WorkerThread
@@ -29,5 +29,10 @@ class RoomRepository(context: Context) {
     @WorkerThread
     suspend fun delete(attraction: Attraction) {
         roomDao.deleteAttraction(AttractionEntity(attraction.id))
+    }
+
+    @WorkerThread
+    suspend fun delete(attractionId: String) {
+        roomDao.deleteAttractionById(attractionId)
     }
 }
