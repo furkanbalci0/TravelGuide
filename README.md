@@ -29,7 +29,6 @@ This mobile application is a guide application. Users who want to have informati
 ### 🏠 Home
 - Attention has been paid to the distinction between Fragment & ViewModel.
 - Observe operations are done in the fragment.
-- 
 
 ```kotlin
 private fun initializeDeals() {
@@ -127,7 +126,6 @@ fun addBookmark(
 | :--------------- | :---------------|
 | <img src="https://user-images.githubusercontent.com/36675566/195175695-be830b8c-6303-4dfe-bca7-cfcec8da3d4f.png" width="320"/> | • Static tab layout. (Trips and Bookmarks)<br>• When clicked, the recycler view adapter is updated.|
 | <img src="https://user-images.githubusercontent.com/36675566/195176122-d28fa73e-a100-47cd-958b-c154ae246b7a.gif" width="320"/> | • Clicking the `FloatActionButton` opens a new `BottomSheets`. The data clicked on this pop-up screen is recorded in `SharedPreferences` and when `Add Trip` button is clicked, `Room` is recorded via **view model**.|
-| <img src="https://user-images.githubusercontent.com/36675566/195169828-be07d240-fe1f-4f7b-b7d0-b11e645a21ce.gif" width="320"/> |• The `Attraction` list of the last selected country is sent to the Adapter.<br>• When the Bookmark button is clicked, the `Room` database is recorded and controlled.<br>• When clicked, it sends an informational message.|
 | <img src="https://user-images.githubusercontent.com/36675566/195181070-11516363-ec2e-4682-9d71-1db2e6ca7fe7.png" width="320"/> |• The `Attraction` classes that have been bookmarked in other fragments are listed here.<br>• When clicked, it redirects to the detail page.|
 
 ![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -169,3 +167,8 @@ fun addBookmark(
 | Image  | Comment |
 | :--------------- | :---------------|
 | <img src="https://user-images.githubusercontent.com/36675566/195188815-45b251e5-df59-4371-be8c-8cfb3fd104f0.gif" width="320"/> | • It places the `DetailObject` class that is sent into it with `DataBinding` where necessary. `Room Database` can be saved.<br>• Selected picture can be enlarged by clicking the enlarge button.|
+
+
+
+## 🖼️ Outputs
+![image](https://user-images.githubusercontent.com/36675566/195134833-aef08f3d-4f3a-4c5f-bc8b-2f74e7a83652.png) ![image](https://user-images.githubusercontent.com/36675566/195134910-729b67be-05d2-4d8d-84da-5cbca7326d43.png) ![image](https://user-images.githubusercontent.com/36675566/195134952-77db5ee1-b274-4e83-930a-b825f4440065.png) ![image](https://user-images.githubusercontent.com/36675566/195135012-c832bd58-4801-4670-b9b9-5d2fab921b1d.png) ![image](https://user-images.githubusercontent.com/36675566/195135099-1650f918-983e-4dc3-b5ae-8301dd8f2d9f.png) ![studio64_TBDOTAuBsf](https://user-images.githubusercontent.com/36675566/195136119-1a205e9b-f3e3-43e1-9dd7-ba9794d5164d.png)
