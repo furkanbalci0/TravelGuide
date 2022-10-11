@@ -32,39 +32,7 @@ This mobile application is a guide application. Users who want to have informati
 <details>
         
 <summary>Click to see sample codes!</summary>
-```kotlin
-private fun initializeDeals() {
 
-        //Observer deals.
-        homeViewModel.attractionsLiveData.observe(viewLifecycleOwner) {
-            binding.dealsRecyclerview.adapter = HomeDealsAdapter(it)
-        }
-
-        //Observe loading.
-        homeViewModel.loading.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.dealsRecyclerview.visibility = View.GONE
-                binding.dealsErrorText.visibility = View.GONE
-                binding.dealsProgressBar.visibility = View.VISIBLE
-            } else {
-                binding.dealsRecyclerview.visibility = View.VISIBLE
-                binding.dealsErrorText.visibility = View.GONE
-                binding.dealsProgressBar.visibility = View.GONE
-            }
-        }
-
-        //Observe error.
-        homeViewModel.error.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.dealsRecyclerview.visibility = View.GONE
-                binding.dealsErrorText.visibility = View.VISIBLE
-            } else {
-                binding.dealsRecyclerview.visibility = View.VISIBLE
-                binding.dealsErrorText.visibility = View.GONE
-            }
-        }
-    }
-```
 </details>
 
 | Image  | Comment |
