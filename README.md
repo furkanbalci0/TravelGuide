@@ -28,7 +28,10 @@ This mobile application is a guide application. Users who want to have informati
 # 
 
 # Outputs
-![image](https://user-images.githubusercontent.com/36675566/195129356-aa3c42a6-3907-4ef8-8418-429facafa22a.png) ![image](https://user-images.githubusercontent.com/36675566/195130633-53b930ab-a475-422f-84a4-b972dd1a8b57.png)
+![image](https://user-images.githubusercontent.com/36675566/195134833-aef08f3d-4f3a-4c5f-bc8b-2f74e7a83652.png) ![image](https://user-images.githubusercontent.com/36675566/195134910-729b67be-05d2-4d8d-84da-5cbca7326d43.png) ![image](https://user-images.githubusercontent.com/36675566/195134952-77db5ee1-b274-4e83-930a-b825f4440065.png) ![image](https://user-images.githubusercontent.com/36675566/195135012-c832bd58-4801-4670-b9b9-5d2fab921b1d.png) ![image](https://user-images.githubusercontent.com/36675566/195135099-1650f918-983e-4dc3-b5ae-8301dd8f2d9f.png)
+
+
+
 
 
 
