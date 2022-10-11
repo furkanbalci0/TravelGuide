@@ -215,6 +215,8 @@ I created an `annotation class` to return 2 `Retrofit` objects.
 ![image](https://user-images.githubusercontent.com/36675566/195194012-22d8bac8-2a2a-4eef-882d-a550a0c35a32.png)
 ![image](https://user-images.githubusercontent.com/36675566/195194649-cee1c1c1-5e80-4309-a6ad-1ac478d14a6d.png)
 
-
 ## 🖼️ Outputs
-![image](https://user-images.githubusercontent.com/36675566/195134833-aef08f3d-4f3a-4c5f-bc8b-2f74e7a83652.png) ![image](https://user-images.githubusercontent.com/36675566/195134910-729b67be-05d2-4d8d-84da-5cbca7326d43.png) ![image](https://user-images.githubusercontent.com/36675566/195134952-77db5ee1-b274-4e83-930a-b825f4440065.png) ![image](https://user-images.githubusercontent.com/36675566/195135012-c832bd58-4801-4670-b9b9-5d2fab921b1d.png) ![image](https://user-images.githubusercontent.com/36675566/195135099-1650f918-983e-4dc3-b5ae-8301dd8f2d9f.png) ![studio64_TBDOTAuBsf](https://user-images.githubusercontent.com/36675566/195136119-1a205e9b-f3e3-43e1-9dd7-ba9794d5164d.png)
+|   |   |  |
+| :---------------: | :---------------: | :---------------: |
+| <img src="https://user-images.githubusercontent.com/36675566/195134833-aef08f3d-4f3a-4c5f-bc8b-2f74e7a83652.png" width="320"/> | <img src="https://user-images.githubusercontent.com/36675566/195134910-729b67be-05d2-4d8d-84da-5cbca7326d43.png" width="320"/> | <img src="https://user-images.githubusercontent.com/36675566/195134952-77db5ee1-b274-4e83-930a-b825f4440065.png" width="320"/> |
+| <img src="https://user-images.githubusercontent.com/36675566/195135012-c832bd58-4801-4670-b9b9-5d2fab921b1d.png" width="320"/> | <img src="https://user-images.githubusercontent.com/36675566/195135099-1650f918-983e-4dc3-b5ae-8301dd8f2d9f.png" width="320"/> | <img src="https://user-images.githubusercontent.com/36675566/195136119-1a205e9b-f3e3-43e1-9dd7-ba9794d5164d.png" width="320"/> |
