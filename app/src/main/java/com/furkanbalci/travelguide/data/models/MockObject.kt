@@ -41,7 +41,7 @@ data class MockObject(
         return images[0].url
     }
 
-    override fun name(): String {
+    override fun customName(): String {
         return title
     }
 
@@ -51,5 +51,9 @@ data class MockObject(
 
     override fun miniDescription(): String {
         return city
+    }
+
+    override fun getCustomId(): String {
+        return id
     }
 }

@@ -7,39 +7,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.databinding.FragmentHomeBinding
-import com.furkanbalci.travelguide.presentation.home.deals.HomeDealsAdapter
-import com.furkanbalci.travelguide.presentation.home.deals.HomeDealsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var dealsViewModel: HomeDealsViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-        //Set view model.
-        dealsViewModel = ViewModelProvider(this)[HomeDealsViewModel::class.java]
 
         //Set binding.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         //Observe deals.
-        this.initializeObservers()
+        initializeDeals()
 
         //Initialize tab layout.
-        this.initializeTabLayout()
+        initializeTabLayout()
 
         //Initialize buttons.
-        this.initializeButtons()
+        initializeButtons()
 
         return binding.root
     }
 
+    /**
+     * Static buttons.
+     */
     private fun initializeButtons() {
 
         //Destination buttons.
@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
             binding.tabLayout.playSoundEffect(android.view.SoundEffectConstants.CLICK)
         }
         binding.homeCarsLayout.setOnClickListener {
-            Snackbar.make(binding.root, "In care...", Snackbar.LENGTH_SHORT).setActionTextColor(Color.RED).show()
+            Snackbar.make(binding.root, R.string.maintenance_text, Snackbar.LENGTH_SHORT).setActionTextColor(Color.RED).show()
         }
 
     }
@@ -68,11 +68,12 @@ class HomeFragment : Fragment() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
+                //Tab layout click listener.
                 when (tab.position) {
-                    0 -> dealsViewModel.refreshData(null)
-                    1 -> dealsViewModel.refreshData("flight")
-                    2 -> dealsViewModel.refreshData("hotel")
-                    3 -> dealsViewModel.refreshData("transportation")
+                    0 -> homeViewModel.refreshData("flight|hotel|transportation")
+                    1 -> homeViewModel.refreshData("flight")
+                    2 -> homeViewModel.refreshData("hotel")
+                    3 -> homeViewModel.refreshData("transportation")
                 }
             }
 
@@ -81,15 +82,15 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun initializeObservers() {
+    private fun initializeDeals() {
 
         //Observer deals.
-        dealsViewModel.success.observe(viewLifecycleOwner) {
+        homeViewModel.attractionsLiveData.observe(viewLifecycleOwner) {
             binding.dealsRecyclerview.adapter = HomeDealsAdapter(it)
         }
 
         //Observe loading.
-        dealsViewModel.loading.observe(viewLifecycleOwner) {
+        homeViewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
                 binding.dealsRecyclerview.visibility = View.GONE
                 binding.dealsErrorText.visibility = View.GONE
@@ -102,7 +103,7 @@ class HomeFragment : Fragment() {
         }
 
         //Observe error.
-        dealsViewModel.error.observe(viewLifecycleOwner) {
+        homeViewModel.error.observe(viewLifecycleOwner) {
             if (it) {
                 binding.dealsRecyclerview.visibility = View.GONE
                 binding.dealsErrorText.visibility = View.VISIBLE

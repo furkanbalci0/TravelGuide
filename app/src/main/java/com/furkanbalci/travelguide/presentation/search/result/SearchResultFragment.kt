@@ -10,43 +10,55 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.databinding.FragmentSearchResultBinding
-import com.furkanbalci.travelguide.presentation.search.attractions.AttractionsViewModel
-import com.furkanbalci.travelguide.presentation.search.attractions.SearchAttractionsAdapter
+import com.furkanbalci.travelguide.presentation.search.SearchViewModel
+import com.furkanbalci.travelguide.presentation.search.adapter.SearchAttractionsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class SearchResultFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchResultBinding
-    private lateinit var attractionsViewModel: AttractionsViewModel
+    private val searchViewModel: SearchViewModel by viewModels()
     private var searchLiveData: MutableLiveData<String> = MutableLiveData()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
+        //Initialize binding.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
-        attractionsViewModel = ViewModelProvider(this)[AttractionsViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Initialize search view.
         arguments?.let {
-            val searchText = it.getString("searchText", "Amsterdam")
+
+            //Get search query from bundle.
+            val searchText = it.getString("searchText", R.string.default_attractions_city.toString())
+
+            //Set search query to search view.
             binding.searchBar.text = Editable.Factory.getInstance().newEditable(searchText)
+
+            //Set position of cursor to end of search query.
             binding.searchBar.setSelection(searchText.length)
         }
 
+        //Observer search query.
         searchLiveData.observe(viewLifecycleOwner) {
-            attractionsViewModel.getData(it)
+            //Update attractions view model.
+            searchViewModel.getAttractions(it)
         }
 
-
+        //Search bar listener.
         binding.searchBar.addTextChangedListener(object : TextWatcher {
 
+            //Delay for search query.
             var handler: Handler = Handler(Looper.getMainLooper() /*UI thread*/)
             var workRunnable: Runnable? = null
             override fun afterTextChanged(s: Editable) {
@@ -61,28 +73,31 @@ class SearchResultFragment : Fragment() {
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
 
+        //Initialize attractions adapter.
         this.initializeAttractions()
     }
 
     private fun initializeAttractions() {
         //Observer deals.
 
+        searchViewModel.attractionsLiveData.observe(viewLifecycleOwner) {
+            binding.recylcerView.adapter = SearchAttractionsAdapter(it, {
+                //TODO: DELETE
+            }, {
+                //TODO: INSERT view model kullanarak yap.
+            })
 
-        attractionsViewModel.success.observe(viewLifecycleOwner) {
-            binding.recylcerView.adapter = SearchAttractionsAdapter(it)
             if (it.isEmpty()) {
                 binding.attractionsErrorText.visibility = View.VISIBLE
-                binding.attractionsErrorText.text = "No results found."
+                binding.attractionsErrorText.text = getString(R.string.no_result)
             }
         }
 
-
         //Observe loading.
-        attractionsViewModel.loading.observe(viewLifecycleOwner) {
+        searchViewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
                 binding.recylcerView.visibility = View.GONE
                 binding.attractionsErrorText.visibility = View.GONE
@@ -95,7 +110,7 @@ class SearchResultFragment : Fragment() {
         }
 
         //Observe error.
-        attractionsViewModel.error.observe(viewLifecycleOwner) {
+        searchViewModel.error.observe(viewLifecycleOwner) {
             if (it) {
                 binding.recylcerView.visibility = View.GONE
                 binding.attractionsErrorText.visibility = View.VISIBLE

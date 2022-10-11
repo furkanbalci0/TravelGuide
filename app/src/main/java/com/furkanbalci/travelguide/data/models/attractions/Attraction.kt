@@ -128,7 +128,7 @@ data class Attraction(
         return images.firstOrNull()?.sizes?.medium?.url ?: ""
     }
 
-    override fun name(): String {
+    override fun customName(): String {
         return name
     }
 
@@ -141,6 +141,10 @@ data class Attraction(
             return properties[2]?.value ?: name
         }
         return name
+    }
+
+    override fun getCustomId(): String {
+        return id
     }
 
     override fun getOtherImages(): List<String> {

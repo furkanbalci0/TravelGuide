@@ -1,7 +1,27 @@
 <resources>
     <string name="app_name">TravelGuide</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_title">Where’s your\nnext destination?</string>
-    <string name="hint">MERHABA</string>
+    <string name="hint">Hint</string>
+    <string name="seeAllText"><p><u>See All</u></p></string>
+    <string name="button_remove_bookmark">Remove Bookmark</string>
+    <string name="button_add_bookmark">Add Bookmark</string>
+    <string name="button_add_trip">Add Trip</string>
+    <string name="text_add_bookmark">Successfully added to bookmarks.</string>
+    <string name="text_remove_bookmark">Removed from bookmarks.</string>
+    <string name="text_add_like">Liked!</string>
+    <string name="text_remove_like">Your like has been removed!</string>
+    <string name="maintenance_text">In care…</string>
+    <string name="no_result">No results found.</string>
+    <string name="default_article_city">Istanbul</string>
+    <string name="default_attractions_city">Amsterdam</string>
+    <string name="guide_screen_title">Guide</string>
+    <string name="guide_screen_subtitle">MIGHT NEED THESE</string>
+    <string name="see_all_text">See All</string>
+    <string name="try_again_text">Please Try Again</string>
+    <string name="search_bar_other_hint">A country, a city, a place… or anything</string>
+    <string name="guide_screen_second_title">TOP-PICK ARTICLES</string>
+    <string name="home_first_button_text">Flights</string>
+    <string name="home_second_static_text">Hotels</string>
+    <string name="add_new_trip_text">Add New Trip</string>
+    <string name="please_all_fill_fields">Please fill all fields.</string>
 </resources>

@@ -20,8 +20,9 @@ data class Article(
     @Json(name = "structured_content")
     val structuredContent: StructuredContent,
     @Json(name = "structured_content_language_info")
-    val structuredContentLanguageInfo: Any?
-): DetailObject {
+    val structuredContentLanguageInfo: Any?,
+    var isBookmarked: Boolean = false
+) : DetailObject {
     data class StructuredContent(
         @Json(name = "attribution")
         val attribution: List<Attribution>,
@@ -162,7 +163,7 @@ data class Article(
         return this.structuredContent.images.firstOrNull()?.sizes?.medium?.url ?: ""
     }
 
-    override fun name(): String {
+    override fun customName(): String {
         return this.name
     }
 
@@ -172,6 +173,10 @@ data class Article(
 
     override fun miniDescription(): String {
         return this.score.toString() + " Score"
+    }
+
+    override fun getCustomId(): String {
+        return this.id
     }
 
     override fun getOtherImages(): List<String> {

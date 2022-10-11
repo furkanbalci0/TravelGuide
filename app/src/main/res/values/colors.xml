@@ -7,7 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="dark_gray">#1B1B1B</color>
+    <color name="light_gray">#B5B5B5</color>
     <color name="skeleton">#ECECEC</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="selected_like_icon">#FF5733</color>
+    <color name="unselected_like_icon">#FFBABA</color>
 </resources>

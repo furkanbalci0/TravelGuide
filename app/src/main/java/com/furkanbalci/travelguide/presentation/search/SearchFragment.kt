@@ -9,25 +9,25 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.databinding.FragmentSearchBinding
-import com.furkanbalci.travelguide.presentation.search.attractions.AttractionsViewModel
-import com.furkanbalci.travelguide.presentation.search.attractions.SearchAttractionsAdapter
-import com.furkanbalci.travelguide.presentation.search.destination.DestinationsViewModel
-import com.furkanbalci.travelguide.presentation.search.destination.SearchDestinationsAdapter
+import com.furkanbalci.travelguide.presentation.search.adapter.DestinationsAdapter
+import com.furkanbalci.travelguide.presentation.search.adapter.SearchAttractionsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-    private lateinit var destinationsViewModel: DestinationsViewModel
-    private lateinit var attractionsViewModel: AttractionsViewModel
+
+    //View models.
+    private val searchViewModel: SearchViewModel by viewModels()
+    private val destinationViewModel: DestinationsViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        destinationsViewModel = ViewModelProvider(this)[DestinationsViewModel::class.java]
-        attractionsViewModel = ViewModelProvider(this)[AttractionsViewModel::class.java]
         return binding.root
     }
 
@@ -35,18 +35,20 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Initialize destinations
-        this.initializeDestinations()
+        initializeDestinations()
 
         //Initialize attractions
-        this.initializeAttractions()
+        initializeAttractions()
 
         //Initialize search bar
-        this.initializeSearchBar()
+        initializeSearchBar()
     }
 
     private fun initializeSearchBar() {
         binding.searchBar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
+
+                //Navigate to search result fragment.
                 val bundle = bundleOf("searchText" to binding.searchBar.text.toString())
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.searchResultFragment, bundle)
@@ -59,12 +61,12 @@ class SearchFragment : Fragment() {
 
     private fun initializeDestinations() {
         //Observer deals.
-        destinationsViewModel.success.observe(viewLifecycleOwner) {
-            binding.searchDestinationsRecyclerView.adapter = SearchDestinationsAdapter(it)
+        destinationViewModel.destinationLiveData.observe(viewLifecycleOwner) {
+            binding.searchDestinationsRecyclerView.adapter = DestinationsAdapter(it)
         }
 
         //Observe loading.
-        destinationsViewModel.loading.observe(viewLifecycleOwner) {
+        destinationViewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
                 binding.searchDestinationsRecyclerView.visibility = View.GONE
                 binding.destinationsErrorText.visibility = View.GONE
@@ -77,7 +79,7 @@ class SearchFragment : Fragment() {
         }
 
         //Observe error.
-        destinationsViewModel.error.observe(viewLifecycleOwner) {
+        destinationViewModel.error.observe(viewLifecycleOwner) {
             if (it) {
                 binding.searchDestinationsRecyclerView.visibility = View.GONE
                 binding.destinationsErrorText.visibility = View.VISIBLE
@@ -91,14 +93,17 @@ class SearchFragment : Fragment() {
     private fun initializeAttractions() {
         //Observer deals.
 
-
-        attractionsViewModel.success.observe(viewLifecycleOwner) {
-            binding.searchNearbyAttractionsRecyclerView.adapter = SearchAttractionsAdapter(it)
+        searchViewModel.attractionsLiveData.observe(viewLifecycleOwner) {
+            binding.searchNearbyAttractionsRecyclerView.adapter = SearchAttractionsAdapter(it, { attractionId ->
+                searchViewModel.removeBookmark(attractionId)
+            }, { attraction ->
+                searchViewModel.addBookmark(attraction)
+            })
         }
 
 
         //Observe loading.
-        attractionsViewModel.loading.observe(viewLifecycleOwner) {
+        searchViewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
                 binding.searchNearbyAttractionsRecyclerView.visibility = View.GONE
                 binding.attractionsErrorText.visibility = View.GONE
@@ -111,7 +116,7 @@ class SearchFragment : Fragment() {
         }
 
         //Observe error.
-        attractionsViewModel.error.observe(viewLifecycleOwner) {
+        searchViewModel.error.observe(viewLifecycleOwner) {
             if (it) {
                 binding.searchNearbyAttractionsRecyclerView.visibility = View.GONE
                 binding.attractionsErrorText.visibility = View.VISIBLE

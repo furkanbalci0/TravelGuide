@@ -9,27 +9,26 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.databinding.FragmentGuideBinding
-import com.furkanbalci.travelguide.presentation.guide.article.ArticleAdapter
-import com.furkanbalci.travelguide.presentation.guide.article.ArticleViewModel
-import com.furkanbalci.travelguide.presentation.search.destination.DestinationsViewModel
-import com.furkanbalci.travelguide.presentation.search.destination.SearchDestinationsAdapter
+import com.furkanbalci.travelguide.presentation.search.DestinationsViewModel
+import com.furkanbalci.travelguide.presentation.search.adapter.DestinationsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class GuideFragment : Fragment() {
 
-    private lateinit var articleViewModel: ArticleViewModel
-    private lateinit var destinationViewModel: DestinationsViewModel
+    private val guideViewModel: GuideViewModel by viewModels()
+    private val destinationViewModel: DestinationsViewModel by viewModels()
+
     private lateinit var binding: FragmentGuideBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_guide, container, false)
 
-        articleViewModel = ViewModelProvider(this)[ArticleViewModel::class.java]
-        destinationViewModel = ViewModelProvider(this)[DestinationsViewModel::class.java]
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -37,33 +36,42 @@ class GuideFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        this.initializeObservers()
-        this.initializeAttractions()
-        this.initializeSearchBar()
+        //Initialize articles.
+        initializeArticles()
+
+        //Initialize attractions.
+        initializeAttractions()
+
+        //Initialize search bar.
+        initializeSearchBar()
 
     }
 
+    //todo: see all butonunu yap.
     private fun initializeSearchBar() {
         binding.searchBar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
+
+                //Navigate to search fragment.
                 val bundle = bundleOf("searchText" to binding.searchBar.text.toString())
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.searchResultFragment, bundle)
             }
+
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
     }
 
-    private fun initializeObservers() {
+    private fun initializeArticles() {
 
         //Observer deals.
-        articleViewModel.success.observe(viewLifecycleOwner) {
+        guideViewModel.articlesLiveData.observe(viewLifecycleOwner) {
             binding.articlesRecyclerView.adapter = ArticleAdapter(it)
         }
 
         //Observe loading.
-        articleViewModel.loading.observe(viewLifecycleOwner) {
+        guideViewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
                 binding.articlesRecyclerView.visibility = View.GONE
                 binding.articlesErrorText.visibility = View.GONE
@@ -76,7 +84,7 @@ class GuideFragment : Fragment() {
         }
 
         //Observe error.
-        articleViewModel.error.observe(viewLifecycleOwner) {
+        guideViewModel.error.observe(viewLifecycleOwner) {
             if (it) {
                 binding.articlesRecyclerView.visibility = View.GONE
                 binding.articlesErrorText.visibility = View.VISIBLE
@@ -89,15 +97,15 @@ class GuideFragment : Fragment() {
 
     private fun initializeAttractions() {
         //Observer deals.
-        destinationViewModel.success.observe(viewLifecycleOwner) {
-            binding.countryRecyclerView.adapter = SearchDestinationsAdapter(it)
+        destinationViewModel.destinationLiveData.observe(viewLifecycleOwner) {
+            binding.countryRecyclerView.adapter = DestinationsAdapter(it)
 
             for (destination in it) {
-                val tabItem = binding.tabLayout.newTab().setText(destination.name())
+                val tabItem = binding.tabLayout.newTab().setText(destination.customName())
                 binding.tabLayout.addTab(tabItem)
                 //Click listener.
                 tabItem.view.setOnClickListener {
-                    articleViewModel.refreshData(destination.country.countryId)
+                    guideViewModel.refreshData(destination.country.countryId)
                 }
 
             }

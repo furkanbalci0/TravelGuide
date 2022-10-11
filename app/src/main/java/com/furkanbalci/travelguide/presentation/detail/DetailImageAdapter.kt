@@ -19,10 +19,16 @@ class DetailImageAdapter(
 
         fun bind(imageUrl: String, position: Int) {
             binding.ivDetailImage.let { miniImage ->
+
+                //Download image with glide.
                 miniImage.download(imageUrl)
                 miniImage.setOnClickListener {
                     if (miniImage.drawable != detailBinding.mainImage.drawable) {
+
+                        //Set main image with clicked image.
                         detailBinding.mainImage.download(imageUrl)
+
+                        //Set last selected image to preferences.
                         PreferencesUtil.defaultPrefs(binding.root.context)["selected-detail-image-position"] = position
                     }
                 }

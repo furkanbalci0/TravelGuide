@@ -50,7 +50,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/home_background_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_home_title">
+                app:layout_constraintTop_toBottomOf="@+id/text_home_title"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:id="@+id/home_flights_layout"
@@ -65,17 +66,18 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/home_rectangle_button"
                         android:padding="@dimen/medium_margin"
-                        android:src="@drawable/ic_flights" />
+                        android:src="@drawable/ic_flights"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
                         android:fontFamily="@font/source_sans_pro_bold"
-                        android:text="Flights"
+                        android:text="@string/home_first_button_text"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
+
                 </LinearLayout>
 
 
@@ -99,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/source_sans_pro_bold"
-                        android:text="Hotels"
+                        android:text="@string/home_second_static_text"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp" />

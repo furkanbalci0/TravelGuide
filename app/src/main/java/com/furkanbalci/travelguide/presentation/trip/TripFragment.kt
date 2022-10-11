@@ -6,44 +6,55 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.furkanbalci.travelguide.R
-import com.furkanbalci.travelguide.data.models.attractions.Attraction
 import com.furkanbalci.travelguide.databinding.FragmentTripBinding
-import com.furkanbalci.travelguide.presentation.search.attractions.SearchAttractionsAdapter
-import com.furkanbalci.travelguide.presentation.trip.bookmark.BookmarkViewModel
-import com.furkanbalci.travelguide.presentation.trip.trips.TripAdapter
+import com.furkanbalci.travelguide.di.DetailObject
+import com.furkanbalci.travelguide.presentation.search.SearchViewModel
+import com.furkanbalci.travelguide.presentation.search.adapter.SearchAttractionsAdapter
+import com.furkanbalci.travelguide.presentation.trip.adapter.TripAdapter
+import com.furkanbalci.travelguide.util.Constants
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class TripFragment : Fragment() {
 
     private lateinit var binding: FragmentTripBinding
-    private lateinit var bookmarkViewModel: BookmarkViewModel
-    private var bookmarkList = mutableListOf<Attraction>()
+    private val searchViewModel: SearchViewModel by viewModels()
+    private val tripViewModel: TripViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private var bookmarkList = mutableListOf<DetailObject>()
+    private var tripList = mutableListOf<DetailObject>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        //Initialize binding.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trip, container, false)
-
-        bookmarkViewModel = ViewModelProvider(this)[BookmarkViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        //Tab layout click listener.
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
                 when (tab.position) {
                     0 -> {
-                        binding.recyclerView.adapter = SearchAttractionsAdapter(bookmarkList)
+                        binding.recyclerView.adapter = TripAdapter(tripList) {
+                            //TODO: tripviewmodel içinde delete işlemi yap launch ile.
+                        }
                         binding.floatingActionButton.visibility = View.VISIBLE
                     }
                     1 -> {
-                        binding.recyclerView.adapter = TripAdapter(bookmarkList)
-                        binding.floatingActionButton.visibility = View.VISIBLE
+                        binding.recyclerView.adapter = SearchAttractionsAdapter(bookmarkList, { attractionId ->
+                            searchViewModel.removeBookmark(attractionId)
+                        }, { attraction ->
+                            searchViewModel.addBookmark(attraction)
+                        })
+                        binding.floatingActionButton.visibility = View.GONE
                     }
                 }
             }
@@ -51,11 +62,41 @@ class TripFragment : Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-        //binding.recyclerView.adapter = BookmarkAdapter(bookmarkViewModel.getData())
-        bookmarkViewModel.success.observe(viewLifecycleOwner) {
+
+        searchViewModel.bookmarkLiveData.observe(viewLifecycleOwner) {
+
+            //Update bookmark list.
             bookmarkList.clear()
             bookmarkList.addAll(it)
-            binding.recyclerView.adapter = SearchAttractionsAdapter(it)
+
+            if (binding.tabLayout.selectedTabPosition == 1) {
+                binding.recyclerView.adapter = SearchAttractionsAdapter(it, { attractionId ->
+                    searchViewModel.removeBookmark(attractionId)
+                }, { attraction ->
+                    searchViewModel.addBookmark(attraction)
+                })
+            }
         }
+
+
+        tripViewModel.tripLiveData.observe(viewLifecycleOwner) {
+
+            //Update bookmark list.
+            tripList.clear()
+            tripList.addAll(it)
+
+            if (binding.tabLayout.selectedTabPosition == 0) {
+                binding.recyclerView.adapter = TripAdapter(tripList) {
+                    //TODO: tripviewmodel içinde delete işlemi yap launch ile.
+                }
+            }
+        }
+
+
+        binding.floatingActionButton.setOnClickListener {
+            val addInventoryBottomSheet = TripBottomSheetFragment()
+            addInventoryBottomSheet.show(childFragmentManager, Constants.TAG)
+        }
+
     }
 }

@@ -43,7 +43,7 @@
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:gravity="center"
                     android:hint="@string/hint"
-                    android:text="@{detailObject.name()}"
+                    android:text="@{detailObject.customName()}"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp"

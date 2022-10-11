@@ -18,9 +18,9 @@
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-
+            android:id="@+id/mainLayout"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="200dp">
 
             <ImageView
                 android:id="@+id/search_destination_image"
@@ -43,7 +43,7 @@
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:gravity="center"
                 android:hint="@string/hint"
-                android:text="@{detailObject.name()}"
+                android:text="@{detailObject.customName()}"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
@@ -116,8 +116,32 @@
                 app:layout_constraintTop_toTopOf="@+id/textView2"
                 app:srcCompat="@drawable/ic_clock" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/delete_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:backgroundTint="#80FFE9E4"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/delete_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/selected_like_icon" />
+
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.cardview.widget.CardView>

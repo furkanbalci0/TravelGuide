@@ -168,6 +168,9 @@ obj/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
+#Gradle properties
+gradle.properties
+
 # JIRA plugin
 atlassian-ide-plugin.xml
 

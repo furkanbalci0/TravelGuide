@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_bold"
-                    android:text="@{destination.name()}"
+                    android:text="@{destination.customName()}"
                     android:textColor="@color/white"
                     android:textAlignment="center"
                     android:textSize="16sp"

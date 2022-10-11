@@ -1,35 +1,19 @@
 package com.furkanbalci.travelguide.data.repositories
 
-import com.furkanbalci.travelguide.data.datasource.triposo.remote.TriposoDataSource
 import com.furkanbalci.travelguide.data.models.article.ArticleResult
 import com.furkanbalci.travelguide.data.models.attractions.AttractionResult
 import com.furkanbalci.travelguide.data.models.country.CountryResult
 import com.furkanbalci.travelguide.util.Resource
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Singleton
 
-@Singleton
-class TriposoApiRepository {
+interface TriposoApiRepository {
 
-    private var dataSource: TriposoDataSource? = null
+    suspend fun getAttractions(city: String?): Flow<Resource<AttractionResult>>
 
-    init {
-        dataSource = TriposoDataSource()
-    }
+    suspend fun findAttractions(vararg id: String): Flow<Resource<AttractionResult>>
 
-    fun getAttractions(city: String?): Flow<Resource<AttractionResult>> {
-        return dataSource!!.getAttractions(city)
-    }
+    suspend fun getCountries(): Flow<Resource<CountryResult>>
 
-    fun findAttractions(vararg id: String): Flow<Resource<AttractionResult>> {
-        return dataSource!!.findAttractions(id.joinToString("|"))
-    }
+    suspend fun getArticles(city: String): Flow<Resource<ArticleResult>>
 
-    fun getCountries(): Flow<Resource<CountryResult>> {
-        return dataSource!!.getCountries()
-    }
-
-    fun getArticles(city: String): Flow<Resource<ArticleResult>> {
-        return dataSource!!.getArticles(city)
-    }
 }

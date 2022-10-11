@@ -18,7 +18,7 @@ data class Destination(
         return this.country.images[0].sizes.medium.url
     }
 
-    override fun name(): String {
+    override fun customName(): String {
         return this.country.countryId.replace("_", " ")
     }
 
@@ -28,5 +28,9 @@ data class Destination(
 
     override fun miniDescription(): String {
         return this.country.name
+    }
+
+    override fun getCustomId(): String {
+        return this.country.id
     }
 }

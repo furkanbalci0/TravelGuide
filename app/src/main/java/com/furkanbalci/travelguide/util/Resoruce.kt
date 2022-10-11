@@ -1,17 +1,12 @@
 package com.furkanbalci.travelguide.util
 
-sealed class Resource<T>(
-    val data: T?,
-    val throwable: Throwable?,
-    val status: ResourceStatus
-) {
-    class Loading<T> : Resource<T>(null, null, ResourceStatus.LOADING)
-    class Success<T>(data: T?) : Resource<T>(data, null, ResourceStatus.SUCCESS)
-    class Error<T>(exception: Exception) : Resource<T>(null, exception, ResourceStatus.ERROR)
-}
+/**
+ * Resource is a generic class that holds a value with its loading status.
+ * @param <T> the type of the resource data.
+ */
 
-enum class ResourceStatus {
-    LOADING,
-    SUCCESS,
-    ERROR
+sealed class Resource<out T> {
+    data class Loading(val loading: Boolean) : Resource<Nothing>()
+    data class Error(val errorMessage: String?) : Resource<Nothing>()
+    data class Success<T>(val data: T?) : Resource<T>()
 }
