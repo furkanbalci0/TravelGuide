@@ -119,15 +119,24 @@ fun addBookmark(
 
 ![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-### 🧳 Trip Plan
+### 🧳 Trip Plan & Bookmarks
 - You can add the places you want to travel and choose your round trip days.
 - The `Attractions` you have registered are listed in the `Bookmark` section.
 
 | Image  | Comment |
 | :--------------- | :---------------|
 | ![studio64_RwIXrgPRGW](https://user-images.githubusercontent.com/36675566/195175695-be830b8c-6303-4dfe-bca7-cfcec8da3d4f.png) | • Static tab layout. (Trips and Bookmarks)<br>• When clicked, the recycler view adapter is updated.|
-| ![studio64_BGo9xn2pf9](https://user-images.githubusercontent.com/36675566/195176122-d28fa73e-a100-47cd-958b-c154ae246b7a.gif) | • Clicking the `FloatActionButton` opens a new `BottomSheets`. The data clicked on this pop-up screen is recorded in `SharedPreferences` and when `Add Trip` button is clicked, `Room` is recorded via **view model**.<br>• |
+| ![studio64_BGo9xn2pf9](https://user-images.githubusercontent.com/36675566/195176122-d28fa73e-a100-47cd-958b-c154ae246b7a.gif) | • Clicking the `FloatActionButton` opens a new `BottomSheets`. The data clicked on this pop-up screen is recorded in `SharedPreferences` and when `Add Trip` button is clicked, `Room` is recorded via **view model**.|
 | ![studio64_odmRvrY7kB](https://user-images.githubusercontent.com/36675566/195169828-be07d240-fe1f-4f7b-b7d0-b11e645a21ce.gif) |• The `Attraction` list of the last selected country is sent to the Adapter.<br>• When the Bookmark button is clicked, the `Room` database is recorded and controlled.<br>• When clicked, it sends an informational message.|
-| ![image](https://user-images.githubusercontent.com/36675566/195181070-11516363-ec2e-4682-9d71-1db2e6ca7fe7.png) |• The `Attraction` classes that have been bookmarked in other fragments are listed here.|
 | ![image](https://user-images.githubusercontent.com/36675566/195181070-11516363-ec2e-4682-9d71-1db2e6ca7fe7.png) |• The `Attraction` classes that have been bookmarked in other fragments are listed here.<br>• When clicked, it redirects to the detail page.|
 
+
+### ⚜️ Guide
+- You can add the places you want to travel and choose your round trip days.
+- The `Attractions` you have registered are listed in the `Bookmark` section.
+
+| Image  | Comment |
+| :--------------- | :---------------|
+| ![studio64_YXqMyxYFj8](https://user-images.githubusercontent.com/36675566/195181780-291505e1-55fc-49af-b924-d4cc87d254ee.gif) | • It lists the important places of the countries thanks to `TriposoAPI`.<br>• All items start loading when we swipe right.|
+| ![image](https://user-images.githubusercontent.com/36675566/195181868-2c941495-8f17-48b8-8462-0f188211c4c8.png) | • A completely custom edit text has been created.<br>• As soon as any button is clicked, `SearchResultFragment` will be transferred and the first letter in it will be transferred to the new fragment with `arguments`.<br>• When clicked, it will redirect to a detail page showing information about that region.|
+| ![studio64_bTfrA9R9n8](https://user-images.githubusercontent.com/36675566/195182299-f6c12a92-c7d1-4132-b750-371a1b4343e3.gif) |• A list of countries is drawn by `TriposoApi`.<br> • `Article` is listed related to the clicked country.<br> • When the heart button is clicked, it saves it into `SharedPreferences`.<br>• UI(main) thread is not affected by the processes. |
