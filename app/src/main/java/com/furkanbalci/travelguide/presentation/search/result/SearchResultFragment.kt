@@ -84,10 +84,10 @@ class SearchResultFragment : Fragment() {
         //Observer deals.
 
         searchViewModel.attractionsLiveData.observe(viewLifecycleOwner) {
-            binding.recylcerView.adapter = SearchAttractionsAdapter(it, {
-                //TODO: DELETE
-            }, {
-                //TODO: INSERT view model kullanarak yap.
+            binding.recylcerView.adapter = SearchAttractionsAdapter(it, { attractionId ->
+                searchViewModel.removeBookmark(attractionId) { searchViewModel.findAttractions() }
+            }, { attraction ->
+                searchViewModel.addBookmark(attraction) { searchViewModel.findAttractions() }
             })
 
             if (it.isEmpty()) {

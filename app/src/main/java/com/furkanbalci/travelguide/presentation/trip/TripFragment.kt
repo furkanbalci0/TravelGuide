@@ -93,10 +93,8 @@ class TripFragment : Fragment() {
         }
 
         tripViewModel.listUpdateLiveData.observe(viewLifecycleOwner) {
-            println("TESTT: 1")
             tripViewModel.getTrips()
             bottomSheet.dismiss()
-            println("TESTT: 2")
         }
 
         tripViewModel.listRemoveLiveData.observe(viewLifecycleOwner) {

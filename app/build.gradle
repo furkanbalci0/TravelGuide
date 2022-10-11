@@ -101,7 +101,6 @@ dependencies {
 
 
     //Motion Layout
-    //TODO: Motion Layout
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //Fullscreen Library

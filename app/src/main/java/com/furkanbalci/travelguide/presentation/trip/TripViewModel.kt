@@ -62,7 +62,6 @@ class TripViewModel @Inject constructor(private val dbRepository: DbRepository) 
             //Get trips.
             dbRepository.insert(trip).collect() {
 
-                println("AAAAAAAAAAAAAA: 0")
                 when (it) {
 
                     is Resource.Loading -> {
@@ -78,7 +77,6 @@ class TripViewModel @Inject constructor(private val dbRepository: DbRepository) 
                     is Resource.Success -> {
                         loading.postValue(false)
                         error.postValue(false)
-                        println("AAAAAAAAAAAAAA: 1")
                         listUpdateLiveData.postValue(true)
                     }
                 }

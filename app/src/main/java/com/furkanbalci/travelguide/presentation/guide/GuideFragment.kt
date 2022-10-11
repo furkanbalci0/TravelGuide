@@ -47,7 +47,6 @@ class GuideFragment : Fragment() {
 
     }
 
-    //todo: see all butonunu yap.
     private fun initializeSearchBar() {
         binding.searchBar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {

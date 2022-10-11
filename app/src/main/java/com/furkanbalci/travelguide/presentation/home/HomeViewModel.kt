@@ -48,7 +48,6 @@ class HomeViewModel @Inject constructor(
                         it.data?.let { list ->
                             attractionsLiveData.postValue(list)
                         }
-
                     }
                 }
             }
