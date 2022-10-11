@@ -114,7 +114,7 @@ fun addBookmark(
 | Image  | Comment |
 | :---------------------------------------------------------------- | :---------------|
 | ![studio64_F8a1OKHp6x](https://user-images.githubusercontent.com/36675566/195167051-bd4cb040-b40c-4c10-9229-77c70f99c1ce.png) | • A completely custom edit text has been created.<br>• As soon as any button is clicked, `SearchResultFragment` will be transferred and the first letter in it will be transferred to the new fragment with `arguments`.<br>• When clicked, it will redirect to a detail page showing information about that region.|
-| ![studio64_uAKl7VS3ui](https://user-images.githubusercontent.com/36675566/195166589-a5a55c30-a299-49b6-9dba-cf15a9b938e6.gif) | |
+| ![studio64_uAKl7VS3ui](https://user-images.githubusercontent.com/36675566/195166589-a5a55c30-a299-49b6-9dba-cf15a9b938e6.gif) | • It lists the important places of the countries thanks to `TriposoAPI`.<br>• All items start loading when we swipe right.|
 | ![studio64_odmRvrY7kB](https://user-images.githubusercontent.com/36675566/195169828-be07d240-fe1f-4f7b-b7d0-b11e645a21ce.gif) |• The `Attraction` list of the last selected country is sent to the Adapter.<br>• When the Bookmark button is clicked, the `Room` database is recorded and controlled.<br>• When clicked, it sends an informational message.|
 
 ![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -128,3 +128,6 @@ fun addBookmark(
 | ![studio64_RwIXrgPRGW](https://user-images.githubusercontent.com/36675566/195175695-be830b8c-6303-4dfe-bca7-cfcec8da3d4f.png) | • Static tab layout. (Trips and Bookmarks)<br>• When clicked, the recycler view adapter is updated.|
 | ![studio64_BGo9xn2pf9](https://user-images.githubusercontent.com/36675566/195176122-d28fa73e-a100-47cd-958b-c154ae246b7a.gif) | • Clicking the `FloatActionButton` opens a new `BottomSheets`. The data clicked on this pop-up screen is recorded in `SharedPreferences` and when `Add Trip` button is clicked, `Room` is recorded via **view model**.<br>• |
 | ![studio64_odmRvrY7kB](https://user-images.githubusercontent.com/36675566/195169828-be07d240-fe1f-4f7b-b7d0-b11e645a21ce.gif) |• The `Attraction` list of the last selected country is sent to the Adapter.<br>• When the Bookmark button is clicked, the `Room` database is recorded and controlled.<br>• When clicked, it sends an informational message.|
+| ![image](https://user-images.githubusercontent.com/36675566/195181070-11516363-ec2e-4682-9d71-1db2e6ca7fe7.png) |• The `Attraction` classes that have been bookmarked in other fragments are listed here.|
+| ![image](https://user-images.githubusercontent.com/36675566/195181070-11516363-ec2e-4682-9d71-1db2e6ca7fe7.png) |• The `Attraction` classes that have been bookmarked in other fragments are listed here.<br>• When clicked, it redirects to the detail page.|
+
