@@ -132,11 +132,21 @@ fun addBookmark(
 
 
 ### ⚜️ Guide
-- You can add the places you want to travel and choose your round trip days.
-- The `Attractions` you have registered are listed in the `Bookmark` section.
+- You can get historical information about countries and read blog posts.
+- You can select the country you want to get information from in the `TabLayout` section.
 
 | Image  | Comment |
 | :--------------- | :---------------|
 | ![studio64_YXqMyxYFj8](https://user-images.githubusercontent.com/36675566/195181780-291505e1-55fc-49af-b924-d4cc87d254ee.gif) | • It lists the important places of the countries thanks to `TriposoAPI`.<br>• All items start loading when we swipe right.|
 | ![image](https://user-images.githubusercontent.com/36675566/195181868-2c941495-8f17-48b8-8462-0f188211c4c8.png) | • A completely custom edit text has been created.<br>• As soon as any button is clicked, `SearchResultFragment` will be transferred and the first letter in it will be transferred to the new fragment with `arguments`.<br>• When clicked, it will redirect to a detail page showing information about that region.|
 | ![studio64_bTfrA9R9n8](https://user-images.githubusercontent.com/36675566/195182299-f6c12a92-c7d1-4132-b750-371a1b4343e3.gif) |• A list of countries is drawn by `TriposoApi`.<br> • `Article` is listed related to the clicked country.<br> • When the heart button is clicked, it saves it into `SharedPreferences`.<br>• UI(main) thread is not affected by the processes. |
+
+
+
+### ⚜️ Search Results
+- You can get historical information about countries and read blog posts.
+- You can select the country you want to get information from in the `TabLayout` section.
+
+| Image  | Comment |
+| :--------------- | :---------------|
+| ![studio64_dCsBr0DuXZ](https://user-images.githubusercontent.com/36675566/195183430-97fc5458-7c66-42b6-a0dd-7075ab3bfea3.gif) | • When you want to search for a country or region, you need to type in the `SearchView` section.<br>• The transition to this screen will be very 'smooth'.<br>• Results related to the searched word will be listed.<br>• It does not send continuous requests for the searched word and sends a request `1.5 seconds` after the word is typed.<br>• Click the 'Bookmark Button' for the 'Attraction' you want to save.|
