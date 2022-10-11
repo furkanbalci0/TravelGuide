@@ -9,8 +9,18 @@ This mobile application is a guide application. Users who want to have informati
 - You can make new searches and get information about the results.
 - You can browse pictures of all places by clicking on them.
 
+## Details
+- All classes are isolated.
+- 2 APIs were used in the whole project.
+- Room database is used.
+- API key and endpoint addresses are hidden.
+- DependencyInject has been used literally.
+- I used `Resource` in Flow.
+- I used `@string.xml`, `@dimen.xml`, `@colors.xml`.
+- 
 
-### 🗜️ Technologies
+
+## 🗜️ Technologies
 - Okhttp
 - Retrofit
 - Kotlin Coroutines
@@ -22,9 +32,10 @@ This mobile application is a guide application. Users who want to have informati
 - Material Design
 
 
-#### 💾 Clean Architecture (**MVVM**)
+## 💾 Clean Architecture (**MVVM**)
 ![image](https://user-images.githubusercontent.com/36675566/195124425-2f63ec04-92e5-4d51-bb70-ca8ccad33047.png)
-![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+# 
 
 ### 🏠 Home
 - Attention has been paid to the distinction between Fragment & ViewModel.
@@ -199,6 +210,12 @@ I created an `annotation class` to return 2 `Retrofit` objects.
     @Retention(AnnotationRetention.BINARY)
     annotation class TriposoApi
 ```
+![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+## ⛓️ Obfuscation
+![image](https://user-images.githubusercontent.com/36675566/195194012-22d8bac8-2a2a-4eef-882d-a550a0c35a32.png)
+![image](https://user-images.githubusercontent.com/36675566/195194649-cee1c1c1-5e80-4309-a6ad-1ac478d14a6d.png)
+
 
 ## 🖼️ Outputs
 ![image](https://user-images.githubusercontent.com/36675566/195134833-aef08f3d-4f3a-4c5f-bc8b-2f74e7a83652.png) ![image](https://user-images.githubusercontent.com/36675566/195134910-729b67be-05d2-4d8d-84da-5cbca7326d43.png) ![image](https://user-images.githubusercontent.com/36675566/195134952-77db5ee1-b274-4e83-930a-b825f4440065.png) ![image](https://user-images.githubusercontent.com/36675566/195135012-c832bd58-4801-4670-b9b9-5d2fab921b1d.png) ![image](https://user-images.githubusercontent.com/36675566/195135099-1650f918-983e-4dc3-b5ae-8301dd8f2d9f.png) ![studio64_TBDOTAuBsf](https://user-images.githubusercontent.com/36675566/195136119-1a205e9b-f3e3-43e1-9dd7-ba9794d5164d.png)
