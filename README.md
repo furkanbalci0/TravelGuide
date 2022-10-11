@@ -27,9 +27,11 @@ This mobile application is a guide application. Users who want to have informati
 ![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ### 🏠 Home
-Attention has been paid to the distinction between Fragment & ViewModel.
-Observe operations are done in the fragment.
-
+- Attention has been paid to the distinction between Fragment & ViewModel.
+- Observe operations are done in the fragment.
+<details>
+        
+<summary>Click to see sample codes!</summary>
 ```kotlin
 private fun initializeDeals() {
 
@@ -63,7 +65,7 @@ private fun initializeDeals() {
         }
     }
 ```
-
+</details>
 
 | Image  | Comment |
 | :--------------- | :---------------|
@@ -79,6 +81,7 @@ private fun initializeDeals() {
 - `SearchView` will transfer `SearchResultFragment` when any text is written and the written text will be transferred there.
 
 `Note:`Example function in view model.
+<summary>Click to see sample codes!</summary>
 ```kotlin
 fun addBookmark(
         attraction: Attraction,
@@ -109,7 +112,7 @@ fun addBookmark(
         }
     }
 ```
-
+</details>
 
 | Image  | Comment |
 | :---------------------------------------------------------------- | :---------------|
@@ -130,6 +133,7 @@ fun addBookmark(
 | ![studio64_odmRvrY7kB](https://user-images.githubusercontent.com/36675566/195169828-be07d240-fe1f-4f7b-b7d0-b11e645a21ce.gif) |• The `Attraction` list of the last selected country is sent to the Adapter.<br>• When the Bookmark button is clicked, the `Room` database is recorded and controlled.<br>• When clicked, it sends an informational message.|
 | ![image](https://user-images.githubusercontent.com/36675566/195181070-11516363-ec2e-4682-9d71-1db2e6ca7fe7.png) |• The `Attraction` classes that have been bookmarked in other fragments are listed here.<br>• When clicked, it redirects to the detail page.|
 
+![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ### ⚜️ Guide
 - You can get historical information about countries and read blog posts.
@@ -141,9 +145,9 @@ fun addBookmark(
 | ![image](https://user-images.githubusercontent.com/36675566/195181868-2c941495-8f17-48b8-8462-0f188211c4c8.png) | • A completely custom edit text has been created.<br>• As soon as any button is clicked, `SearchResultFragment` will be transferred and the first letter in it will be transferred to the new fragment with `arguments`.<br>• When clicked, it will redirect to a detail page showing information about that region.|
 | ![studio64_bTfrA9R9n8](https://user-images.githubusercontent.com/36675566/195182299-f6c12a92-c7d1-4132-b750-371a1b4343e3.gif) |• A list of countries is drawn by `TriposoApi`.<br> • `Article` is listed related to the clicked country.<br> • When the heart button is clicked, it saves it into `SharedPreferences`.<br>• UI(main) thread is not affected by the processes. |
 
+![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-
-### ⚜️ Search Results
+### 🔥 Search Results
 - You can get historical information about countries and read blog posts.
 - You can select the country you want to get information from in the `TabLayout` section.
 
