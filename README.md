@@ -172,6 +172,7 @@ fun addBookmark(
 
 ## 💉 Dependency Injection
 I created an `annotation class` to return 2 `Retrofit` objects.
+
 ![image](https://user-images.githubusercontent.com/36675566/195191977-4d5ebe18-473f-44de-bbb4-2a73d379833e.png)
 
 ```kotlin
