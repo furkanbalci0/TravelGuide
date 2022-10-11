@@ -29,11 +29,41 @@ This mobile application is a guide application. Users who want to have informati
 ### 🏠 Home
 - Attention has been paid to the distinction between Fragment & ViewModel.
 - Observe operations are done in the fragment.
-<details>
-        
-<summary>Click to see sample codes!</summary>
+- 
 
-</details>
+```kotlin
+private fun initializeDeals() {
+
+        //Observer deals.
+        homeViewModel.attractionsLiveData.observe(viewLifecycleOwner) {
+            binding.dealsRecyclerview.adapter = HomeDealsAdapter(it)
+        }
+
+        //Observe loading.
+        homeViewModel.loading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.dealsRecyclerview.visibility = View.GONE
+                binding.dealsErrorText.visibility = View.GONE
+                binding.dealsProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.dealsRecyclerview.visibility = View.VISIBLE
+                binding.dealsErrorText.visibility = View.GONE
+                binding.dealsProgressBar.visibility = View.GONE
+            }
+        }
+
+        //Observe error.
+        homeViewModel.error.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.dealsRecyclerview.visibility = View.GONE
+                binding.dealsErrorText.visibility = View.VISIBLE
+            } else {
+                binding.dealsRecyclerview.visibility = View.VISIBLE
+                binding.dealsErrorText.visibility = View.GONE
+            }
+        }
+    }
+```
 
 | Image  | Comment |
 | :--------------- | :---------------|
@@ -49,7 +79,7 @@ This mobile application is a guide application. Users who want to have informati
 - `SearchView` will transfer `SearchResultFragment` when any text is written and the written text will be transferred there.
 
 `Note:`Example function in view model.
-<summary>Click to see sample codes!</summary>
+
 ```kotlin
 fun addBookmark(
         attraction: Attraction,
@@ -80,7 +110,6 @@ fun addBookmark(
         }
     }
 ```
-</details>
 
 | Image  | Comment |
 | :---------------------------------------------------------------- | :---------------|
