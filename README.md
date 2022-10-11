@@ -168,7 +168,36 @@ fun addBookmark(
 | :--------------- | :---------------|
 | <img src="https://user-images.githubusercontent.com/36675566/195188815-45b251e5-df59-4371-be8c-8cfb3fd104f0.gif" width="320"/> | • It places the `DetailObject` class that is sent into it with `DataBinding` where necessary. `Room Database` can be saved.<br>• Selected picture can be enlarged by clicking the enlarge button.|
 
+![image](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
+## 💉 Dependency Injection
+I created an `annotation class` to return 2 `Retrofit` objects.
+![image](https://user-images.githubusercontent.com/36675566/195191977-4d5ebe18-473f-44de-bbb4-2a73d379833e.png)
+
+```kotlin
+...
+    @MockApi
+    @Provides
+    @Singleton
+    fun provideMockService(@MockApi retrofit: Retrofit): MockApiService {
+        return retrofit.create(MockApiService::class.java)
+    }
+
+    @TriposoApi
+    @Provides
+    @Singleton
+    fun provideTriposoService(@TriposoApi retrofit: Retrofit): TriposoApiService {
+        return retrofit.create(TriposoApiService::class.java)
+    }
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class MockApi
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class TriposoApi
+```
 
 ## 🖼️ Outputs
 ![image](https://user-images.githubusercontent.com/36675566/195134833-aef08f3d-4f3a-4c5f-bc8b-2f74e7a83652.png) ![image](https://user-images.githubusercontent.com/36675566/195134910-729b67be-05d2-4d8d-84da-5cbca7326d43.png) ![image](https://user-images.githubusercontent.com/36675566/195134952-77db5ee1-b274-4e83-930a-b825f4440065.png) ![image](https://user-images.githubusercontent.com/36675566/195135012-c832bd58-4801-4670-b9b9-5d2fab921b1d.png) ![image](https://user-images.githubusercontent.com/36675566/195135099-1650f918-983e-4dc3-b5ae-8301dd8f2d9f.png) ![studio64_TBDOTAuBsf](https://user-images.githubusercontent.com/36675566/195136119-1a205e9b-f3e3-43e1-9dd7-ba9794d5164d.png)
