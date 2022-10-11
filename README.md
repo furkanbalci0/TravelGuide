@@ -17,7 +17,6 @@ This mobile application is a guide application. Users who want to have informati
 - DependencyInject has been used literally.
 - I used `Resource` in Flow.
 - I used `@string.xml`, `@dimen.xml`, `@colors.xml`.
-- 
 
 
 ## 🗜️ Technologies
