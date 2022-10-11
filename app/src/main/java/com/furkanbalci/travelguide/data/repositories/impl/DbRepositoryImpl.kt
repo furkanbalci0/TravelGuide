@@ -21,20 +21,20 @@ class DbRepositoryImpl @Inject constructor(private val dataSource: DbDataSource)
         return dataSource.getTrips()
     }
 
-    override suspend fun insert(attraction: Attraction) {
-        dataSource.insertAttraction(BookmarkEntity(attraction.id))
+    override suspend fun insert(attraction: Attraction): Flow<Resource<Long>> {
+        return dataSource.insertAttraction(BookmarkEntity(attraction.id))
     }
 
-    override suspend fun insert(trip: Trip) {
-        dataSource.insertTrip(trip)
+    override suspend fun insert(trip: Trip): Flow<Resource<Long>> {
+        return dataSource.insertTrip(trip)
     }
 
-    override suspend fun delete(attractionId: String) {
-        dataSource.deleteAttractionById(attractionId)
+    override suspend fun delete(attractionId: String): Flow<Resource<Int>> {
+        return dataSource.deleteAttractionById(attractionId)
     }
 
-    override suspend fun deleteTrip(tripId: String) {
-        dataSource.deleteTripById(tripId)
+    override suspend fun deleteTrip(tripId: String): Flow<Resource<Int>> {
+        return dataSource.deleteTripById(tripId)
     }
 
 }

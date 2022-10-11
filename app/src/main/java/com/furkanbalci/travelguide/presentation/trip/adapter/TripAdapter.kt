@@ -10,9 +10,10 @@ import com.furkanbalci.travelguide.databinding.TripItemBinding
 import com.furkanbalci.travelguide.di.DetailObject
 
 class TripAdapter(
-    private val trips: List<DetailObject>,
     var onDeleteButtonClick: (String) -> Unit
 ) : RecyclerView.Adapter<TripAdapter.ViewHolder>() {
+
+    private var tripList: List<DetailObject>? = null
 
     inner class ViewHolder(private val binding: TripItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(result: DetailObject) {
@@ -38,10 +39,15 @@ class TripAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(this.trips[position])
+        holder.bind(this.tripList!![position])
     }
 
     override fun getItemCount(): Int {
-        return this.trips.size
+        return this.tripList?.size ?: 0
+    }
+
+    fun setData(tripList: List<DetailObject>) {
+        this.tripList = tripList
+        notifyDataSetChanged()
     }
 }

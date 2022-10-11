@@ -91,13 +91,16 @@ class SearchFragment : Fragment() {
     }
 
     private fun initializeAttractions() {
-        //Observer deals.
-
+        //Observer data.
         searchViewModel.attractionsLiveData.observe(viewLifecycleOwner) {
             binding.searchNearbyAttractionsRecyclerView.adapter = SearchAttractionsAdapter(it, { attractionId ->
-                searchViewModel.removeBookmark(attractionId)
+                searchViewModel.removeBookmark(attractionId) {
+                    searchViewModel.getAttractions(searchViewModel.lastSelectedCity)
+                }
             }, { attraction ->
-                searchViewModel.addBookmark(attraction)
+                searchViewModel.addBookmark(attraction) {
+                    searchViewModel.getAttractions(searchViewModel.lastSelectedCity)
+                }
             })
         }
 

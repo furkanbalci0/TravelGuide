@@ -11,41 +11,37 @@ import javax.inject.Inject
 
 class DbLocalDataSource @Inject constructor(private val travelDao: TravelDao) : DbDataSource {
 
-    override suspend fun getBookmarks(): Flow<Resource<List<BookmarkEntity>>> = flow {
+    override suspend fun getBookmarks(): Flow<Resource<List<BookmarkEntity>>> {
+        return execute { travelDao.getBookmarks() }
+    }
+
+    override suspend fun getTrips(): Flow<Resource<List<Trip>>> {
+        return execute { travelDao.getTrips() }
+    }
+
+    override suspend fun insertAttraction(attraction: BookmarkEntity): Flow<Resource<Long>> {
+        return execute { travelDao.insertAttraction(attraction) }
+    }
+
+    override suspend fun insertTrip(trip: Trip): Flow<Resource<Long>> {
+        return execute { travelDao.insertTrip(trip) }
+    }
+
+    override suspend fun deleteAttractionById(attractionId: String): Flow<Resource<Int>> {
+        return execute { travelDao.deleteAttractionById(attractionId) }
+    }
+
+    override suspend fun deleteTripById(tripId: String): Flow<Resource<Int>> {
+        return execute { travelDao.deleteTripById(tripId) }
+    }
+
+
+    private fun <T> execute(block: () -> T) = flow {
         emit(Resource.Loading(true))
         try {
-            emit(Resource.Success(travelDao.getBookmarks()))
+            emit(Resource.Success(block()))
         } catch (e: Exception) {
             emit(Resource.Error(e.localizedMessage))
         }
-    }
-
-    override suspend fun getTrips(): Flow<Resource<List<Trip>>> = flow {
-        emit(Resource.Loading(true))
-        try {
-            emit(Resource.Success(travelDao.getTrips()))
-        } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage))
-        }
-    }
-
-    override suspend fun insertAttraction(attraction: BookmarkEntity) {
-        travelDao.insertAttraction(attraction)
-    }
-
-    override suspend fun insertTrip(trip: Trip) {
-        travelDao.insertTrip(trip)
-    }
-
-    override suspend fun deleteAttraction(attraction: BookmarkEntity) {
-        travelDao.deleteAttraction(attraction)
-    }
-
-    override suspend fun deleteAttractionById(attractionId: String) {
-        travelDao.deleteAttractionById(attractionId)
-    }
-
-    override suspend fun deleteTripById(tripId: String) {
-        travelDao.deleteTripById(tripId)
     }
 }

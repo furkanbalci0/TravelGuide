@@ -12,5 +12,10 @@ object Constants {
     const val TAG = "AddInventoryBottomSheetFragment"
 
     const val ROOM_DB_NAME = "travel_app_database"
+    const val API_ITEM_LIMIT = 100
+
+
+
+
 
 }

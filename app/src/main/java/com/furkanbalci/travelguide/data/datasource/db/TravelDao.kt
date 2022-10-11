@@ -1,7 +1,6 @@
 package com.furkanbalci.travelguide.data.datasource.db
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.furkanbalci.travelguide.data.models.Trip
@@ -21,19 +20,16 @@ interface TravelDao {
     fun getTrips(): List<Trip>
 
     @Insert
-    fun insertAttraction(attraction: BookmarkEntity)
+    fun insertAttraction(attraction: BookmarkEntity): Long
 
     @Insert
-    fun insertTrip(trip: Trip)
-
-    @Delete
-    fun deleteAttraction(attraction: BookmarkEntity) //TODO: BURAYA BAK VE SİL
+    fun insertTrip(trip: Trip): Long
 
     @Query("DELETE FROM bookmark WHERE attraction_id = :attractionId")
-    fun deleteAttractionById(attractionId: String)
+    fun deleteAttractionById(attractionId: String): Int
 
     @Query("DELETE FROM trips WHERE trip_id = :tripId")
-    fun deleteTripById(tripId: String)
+    fun deleteTripById(tripId: String): Int
 
 
 }

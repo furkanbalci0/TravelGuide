@@ -3,8 +3,6 @@ package com.furkanbalci.travelguide.presentation.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.furkanbalci.travelguide.data.models.Destination
-import com.furkanbalci.travelguide.data.models.Trip
-import com.furkanbalci.travelguide.data.repositories.DbRepository
 import com.furkanbalci.travelguide.data.repositories.TriposoApiRepository
 import com.furkanbalci.travelguide.presentation.base.BaseViewModel
 import com.furkanbalci.travelguide.util.Resource
@@ -15,8 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DestinationsViewModel @Inject constructor(
-    private val repository: TriposoApiRepository,
-    private val dbRepository: DbRepository
+    private val repository: TriposoApiRepository
 ) : BaseViewModel() {
 
     val destinationLiveData = MutableLiveData<List<Destination>>()
@@ -49,16 +46,7 @@ class DestinationsViewModel @Inject constructor(
                         destinationLiveData.postValue(list.shuffled())
                     }
                 }
-
             }
         }
     }
-
-    //TODO: BURAYA BAK
-    fun addTrip(trip: Trip) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepository.insert(trip)
-        }
-    }
-
 }

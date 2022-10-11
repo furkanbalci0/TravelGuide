@@ -40,6 +40,7 @@ class SearchAttractionsAdapter(
                     onBookmarkInsertButtonClick(attraction)
                     Toast.makeText(binding.root.context, R.string.text_add_bookmark, Toast.LENGTH_SHORT).show()
                 }
+                attraction.isBookmarked = !attraction.isBookmarked
             }
 
             //If attraction is bookmarked, set bookmark icon color to selected color.

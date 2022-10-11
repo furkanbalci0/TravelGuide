@@ -21,8 +21,8 @@ class SearchViewModel @Inject constructor(
     val attractionsLiveData = MutableLiveData<List<Attraction>>()
     val bookmarkLiveData = MutableLiveData<List<Attraction>>()
 
-    private var bookmarkList: List<String> = listOf()
-    private var lastSelectedCity = "Amsterdam"
+    private var bookmarkList: MutableList<String> = mutableListOf()
+    var lastSelectedCity = "Amsterdam"
 
     init {
         getBookmarks()
@@ -52,10 +52,10 @@ class SearchViewModel @Inject constructor(
                         loading.postValue(false)
                         error.postValue(false)
                         it.data?.let { list ->
-                            bookmarkList = list.map { it.attractionId }
-                            getAttractions()
-                            findAttractions()
+                            bookmarkList = list.map { it.attractionId }.toMutableList()
                         }
+                        getAttractions()
+                        findAttractions()
                     }
                 }
             }
@@ -73,7 +73,6 @@ class SearchViewModel @Inject constructor(
 
             //Get attractions.
             triposoRepository.getAttractions(city).collect() {
-
                 when (it) {
 
                     is Resource.Loading -> {
@@ -126,6 +125,8 @@ class SearchViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
+                        loading.postValue(false)
+                        error.postValue(false)
                         //Get attractions.
                         val attractions = it.data!!.results.filter { attraction -> attraction.getOtherImages().isNotEmpty() }
 
@@ -142,15 +143,61 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun addBookmark(attraction: Attraction) {
-        viewModelScope.launch(Dispatchers.Main) {
-            dbRepository.insert(attraction)
+    fun addBookmark(
+        attraction: Attraction,
+        onBookmarkAddButtonClick: (Attraction) -> Unit
+    ) {
+        viewModelScope.launch {
+            dbRepository.insert(attraction).collect() {
+                when (it) {
+
+                    is Resource.Loading -> {
+                        loading.postValue(true)
+                        error.postValue(false)
+                    }
+
+                    is Resource.Error -> {
+                        loading.postValue(false)
+                        error.postValue(true)
+                    }
+
+                    is Resource.Success -> {
+                        loading.postValue(false)
+                        error.postValue(false)
+                        bookmarkList.add(attraction.id)
+                        onBookmarkAddButtonClick(attraction)
+                    }
+                }
+            }
         }
     }
 
-    fun removeBookmark(attractionId: String) {
-        viewModelScope.launch(Dispatchers.Main) {
-            dbRepository.delete(attractionId)
+    fun removeBookmark(
+        attractionId: String,
+        onBookmarkRemoveButtonClick: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            dbRepository.delete(attractionId).collect() {
+                when (it) {
+
+                    is Resource.Loading -> {
+                        loading.postValue(true)
+                        error.postValue(false)
+                    }
+
+                    is Resource.Error -> {
+                        loading.postValue(false)
+                        error.postValue(true)
+                    }
+
+                    is Resource.Success -> {
+                        loading.postValue(false)
+                        error.postValue(false)
+                        bookmarkList.remove(attractionId)
+                        onBookmarkRemoveButtonClick(attractionId)
+                    }
+                }
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ import com.furkanbalci.travelguide.util.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-@NetworkModule.MockApi
 class MockApiRepositoryImpl @Inject constructor(
     @NetworkModule.MockApi private val dataSource: MockDataSource
 ) : MockApiRepository {

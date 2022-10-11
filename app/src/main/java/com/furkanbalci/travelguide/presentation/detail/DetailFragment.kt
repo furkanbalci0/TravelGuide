@@ -13,19 +13,19 @@ import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.data.models.attractions.Attraction
 import com.furkanbalci.travelguide.databinding.FragmentDetailBinding
 import com.furkanbalci.travelguide.di.DetailObject
+import com.furkanbalci.travelguide.presentation.search.SearchViewModel
 import com.furkanbalci.travelguide.util.PreferencesUtil
 import com.furkanbalci.travelguide.util.PreferencesUtil.get
 import com.furkanbalci.travelguide.util.PreferencesUtil.set
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
-    private val viewModel: DetailViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
@@ -116,11 +116,13 @@ class DetailFragment : Fragment() {
             //Button click listener.
             binding.addBookmarkButton.setOnClickListener {
                 if (attraction.isBookmarked) {
-                    viewModel.deleteBookmark(attraction.id)
-                    Toast.makeText(binding.root.context, getString(R.string.text_add_bookmark), Toast.LENGTH_SHORT).show()
+                    viewModel.removeBookmark(attraction.id) {
+                        Toast.makeText(binding.root.context, R.string.text_remove_bookmark, Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    viewModel.addBookmark(attraction)
-                    Toast.makeText(binding.root.context, getString(R.string.text_remove_bookmark), Toast.LENGTH_SHORT).show()
+                    viewModel.addBookmark(attraction) {
+                        Toast.makeText(binding.root.context, R.string.text_add_bookmark, Toast.LENGTH_SHORT).show()
+                    }
                 }
                 attraction.isBookmarked = !attraction.isBookmarked
                 //Refresh layout.

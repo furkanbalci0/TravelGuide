@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.furkanbalci.travelguide.R
 import com.furkanbalci.travelguide.data.models.Trip
 import com.furkanbalci.travelguide.databinding.TripBottomSheetsBinding
-import com.furkanbalci.travelguide.presentation.detail.DetailViewModel
 import com.furkanbalci.travelguide.presentation.search.DestinationsViewModel
 import com.furkanbalci.travelguide.presentation.trip.adapter.TripBottomSheetAdapter
 import com.furkanbalci.travelguide.util.DateUtil
@@ -22,10 +21,9 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class TripBottomSheetFragment : BottomSheetDialogFragment() {
+class TripBottomSheetFragment(var onClick: (Trip) -> Unit) : BottomSheetDialogFragment() {
 
     private lateinit var binding: TripBottomSheetsBinding
-    private val viewModel: DetailViewModel by viewModels()
     private val destinationsViewModel: DestinationsViewModel by viewModels()
 
 
@@ -53,10 +51,10 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
             _preferences["trip-destination-starting-time"] = null
         }
 
-        this.initializeDestinations()
+        initializeDestinations()
 
         //Save trip button click listener.
-        this.initializeButtons()
+        initializeButtons()
     }
 
 
@@ -100,7 +98,6 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
             val startingDate: Long = PreferencesUtil.defaultPrefs(it.context).getLong("trip-destination-starting-time", 0L)
             val endingDate: Long = PreferencesUtil.defaultPrefs(it.context).getLong("trip-destination-ending-time", 0L)
 
-            println("OLLYY: $destinationName $destinationImage $startingDate $endingDate")
             if (destinationName != null && destinationImage != null && startingDate != 0L && endingDate != 0L) {
 
                 val trip = Trip(
@@ -111,10 +108,7 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
                     endingDate = endingDate,
                 )
 
-                //todo: Add trip to database.
-
-                //Close bottom sheet.
-                this.dismiss()
+                onClick(trip)
             } else {
                 Toast.makeText(it.context, getString(R.string.please_all_fill_fields), Toast.LENGTH_SHORT).show()
             }

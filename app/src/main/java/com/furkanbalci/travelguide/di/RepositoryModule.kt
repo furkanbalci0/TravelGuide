@@ -4,7 +4,9 @@ package com.furkanbalci.travelguide.di
 import com.furkanbalci.travelguide.data.datasource.db.locale.DbLocalDataSource
 import com.furkanbalci.travelguide.data.datasource.mock.remote.MockRetrofitDataSource
 import com.furkanbalci.travelguide.data.datasource.triposo.remote.TriposoRetrofitDataSource
-import com.furkanbalci.travelguide.data.repositories.*
+import com.furkanbalci.travelguide.data.repositories.DbRepository
+import com.furkanbalci.travelguide.data.repositories.MockApiRepository
+import com.furkanbalci.travelguide.data.repositories.TriposoApiRepository
 import com.furkanbalci.travelguide.data.repositories.impl.DbRepositoryImpl
 import com.furkanbalci.travelguide.data.repositories.impl.MockApiRepositoryImpl
 import com.furkanbalci.travelguide.data.repositories.impl.TriposoApiRepositoryImpl
@@ -26,7 +28,7 @@ class RepositoryModule {
     ): TriposoApiRepository {
         return TriposoApiRepositoryImpl(dataSource)
     }
-    
+
     @Provides
     @Singleton
     fun provideDbRepository(

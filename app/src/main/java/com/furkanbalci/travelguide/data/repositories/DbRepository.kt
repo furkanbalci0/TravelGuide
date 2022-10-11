@@ -12,12 +12,12 @@ interface DbRepository {
 
     suspend fun getTrips(): Flow<Resource<List<Trip>>>
 
-    suspend fun insert(attraction: Attraction)
+    suspend fun insert(attraction: Attraction): Flow<Resource<Long>>
 
-    suspend fun insert(trip: Trip)
+    suspend fun insert(trip: Trip): Flow<Resource<Long>>
 
-    suspend fun delete(attractionId: String)
+    suspend fun delete(attractionId: String): Flow<Resource<Int>>
 
-    suspend fun deleteTrip(tripId: String)
+    suspend fun deleteTrip(tripId: String): Flow<Resource<Int>>
 
 }

@@ -11,14 +11,12 @@ interface DbDataSource {
 
     suspend fun getTrips(): Flow<Resource<List<Trip>>>
 
-    suspend fun insertAttraction(attraction: BookmarkEntity)
+    suspend fun insertAttraction(attraction: BookmarkEntity): Flow<Resource<Long>>
 
-    suspend fun insertTrip(trip: Trip)
+    suspend fun insertTrip(trip: Trip): Flow<Resource<Long>>
 
-    suspend fun deleteAttraction(attraction: BookmarkEntity)
+    suspend fun deleteAttractionById(attractionId: String): Flow<Resource<Int>>
 
-    suspend fun deleteAttractionById(attractionId: String)
-
-    suspend fun deleteTripById(tripId: String)
+    suspend fun deleteTripById(tripId: String): Flow<Resource<Int>>
 
 }

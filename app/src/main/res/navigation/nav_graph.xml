@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.furkanbalci.travelguide.presentation.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/navigation_guide"
         android:name="com.furkanbalci.travelguide.presentation.guide.GuideFragment"
         android:label="fragment_guide"
-        tools:layout="@layout/fragment_guide" >
+        tools:layout="@layout/fragment_guide">
         <action
             android:id="@+id/action_navigation_guide_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -27,7 +27,7 @@
         android:id="@+id/navigation_search"
         android:name="com.furkanbalci.travelguide.presentation.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_navigation_search_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -41,7 +41,7 @@
         android:id="@+id/navigation_trip"
         android:name="com.furkanbalci.travelguide.presentation.trip.TripFragment"
         android:label="fragment_trip"
-        tools:layout="@layout/fragment_trip" >
+        tools:layout="@layout/fragment_trip">
         <action
             android:id="@+id/action_navigation_trip_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.furkanbalci.travelguide.presentation.search.result.SearchResultFragment"
-        android:label="SearchResultFragment" >
+        android:label="SearchResultFragment">
         <action
             android:id="@+id/action_searchResultFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
